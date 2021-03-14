@@ -1,5 +1,6 @@
 import { TableExtractor } from './extractors/table_extractor';
 import { ListExtractor } from './extractors/list_extractor';
+import { FragmentedExtractor } from './extractors/fragmented_extractor';
 
 /**
  * Extract a range
@@ -8,7 +9,7 @@ import { ListExtractor } from './extractors/list_extractor';
  *   - Switch the table to a fixed layout
  */
 export function extract(range) {
-  const extractors = [new TableExtractor(), new ListExtractor()];
+  const extractors = [new TableExtractor(), new ListExtractor(), new FragmentedExtractor()];
   extractors.forEach((extractor) => extractor.before(range));
   const contents = range.extractContents();
   extractors.forEach((extractor) => extractor.after(contents));

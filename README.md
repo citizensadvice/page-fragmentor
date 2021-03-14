@@ -16,7 +16,7 @@ This library is a simpler sub-set of features, but allowing greater customisatio
 
 ## Instructions
 
-Include the provided 'auto' script and the provided css on the page.
+Include the provided ['auto'](src/auto.js) script and the provided [css](styles/styles.css) on the page.
 
 The page will be fragmented into printable pages.
 
@@ -157,13 +157,20 @@ The CSS contains some base settings for tables.
 By default a `<tr>` has `break-inside: avoid`.  Without this breaks may happen within a table cell, which may
 lead to cells changing columns.
 
-Oversized table cells, theads or captions may lead to unpredictable results.
+Oversized table cells, `<thead>`s or `<caption>`s may lead to unpredictable results.
 
 ### Lists and counters
 
 If an `<ol>` is fragmented the `start` property is set on the new fragment to preserve numbering.
 
 If you use counters, be sure to check they still count across pages as expected.
+
+### Styling fragmented elements
+
+If an element is split across a page then the attribute `data-fragemented-start="true"` will be added
+to the initial part, and `data-fragemented-end="true"` will be added to the second part.
+
+Use this to modify, for example borders or padding.
 
 ### Events
 
@@ -190,7 +197,7 @@ The fragmentation algorithm is loosely based on the [CSS fragmentation module 3]
 - any CSS that changes the rendered order of elements from the logical DOM order - such a flex-order, grid, or floats -
   is not considered and may result in unexpected breakpoints
 - only page breaks are considered
-- left, right, recto and verso breaks are no supported
+- left, right, recto and verso breaks are not supported
 - [class 3 break points][7] are not considered
 - `box-decoration-break` is not supported. Elements are cloned when fragmented and all margins, borders and paddings are cloned
 - margins, borders and padding are not [collapsed to prevent overflow][8]
