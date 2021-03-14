@@ -167,8 +167,8 @@ If you use counters, be sure to check they still count across pages as expected.
 
 ### Styling fragmented elements
 
-If an element is split across a page then the attribute `data-fragemented-start="true"` will be added
-to the initial part, and `data-fragemented-end="true"` will be added to the second part.
+If an element is split across a page then the attribute `data-fragmented-start="true"` will be added
+to the initial part, and `data-fragmented-end="true"` will be added to the second part.
 
 Use this to modify, for example borders or padding.
 
