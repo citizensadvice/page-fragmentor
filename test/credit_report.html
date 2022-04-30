@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <title>Experian credit report</title>
+  <link href="../styles/styles.css" rel="stylesheet">
+  <script src="../src/auto.js"></script>
+  <style type="text/css">
+    /* line 5, app/assets/stylesheets/pdf.scss */
+    html {
+      font: 12pt/normal 'Open sans', sans-serif;
+    }
+
+    /* line 9, app/assets/stylesheets/pdf.scss */
+    body {
+      background: transparent;
+    }
+
+    /* line 14, app/assets/stylesheets/pdf.scss */
+    body[aria-busy=true]:after {
+      top: 8em;
+    }
+
+    /* line 19, app/assets/stylesheets/pdf.scss */
+    body[aria-busy=false] {
+      overflow: hidden;
+    }
+
+    /* line 23, app/assets/stylesheets/pdf.scss */
+    .page {
+      margin: 1em auto;
+    }
+
+    /* line 27, app/assets/stylesheets/pdf.scss */
+    .page:first-child {
+      margin-top: 0;
+    }
+
+    /* line 31, app/assets/stylesheets/pdf.scss */
+    .page:last-child {
+      margin-bottom: 0;
+    }
+
+    /* line 35, app/assets/stylesheets/pdf.scss */
+    .page:not(:first-child) .page-header {
+      display: none;
+    }
+
+    /* line 39, app/assets/stylesheets/pdf.scss */
+    .footer-content {
+      display: none;
+    }
+
+    /* line 43, app/assets/stylesheets/pdf.scss */
+    [data-footer-location=first_page] .page:first-child .footer-content {
+      display: block;
+    }
+
+    /* line 47, app/assets/stylesheets/pdf.scss */
+    [data-footer-location=all_pages] .page .footer-content {
+      display: block;
+    }
+
+    /* line 51, app/assets/stylesheets/pdf.scss */
+    [data-footer-location=last_page] .page[data-last-page=true] .footer-content {
+      display: block;
+    }
+
+    /* line 55, app/assets/stylesheets/pdf.scss */
+    .footer-content > *:first-child {
+      margin-bottom: 0;
+    }
+
+    /* line 59, app/assets/stylesheets/pdf.scss */
+    .footer-content > *:last-child {
+      margin-bottom: 0;
+    }
+
+    /* line 63, app/assets/stylesheets/pdf.scss */
+    .page-numbers {
+      font-size: 10pt;
+      margin-top: 1rem;
+    }
+
+    /* line 70, app/assets/stylesheets/pdf.scss */
+    [data-page-count="1"] .page-numbers {
+      display: none;
+    }
+
+    /* line 74, app/assets/stylesheets/pdf.scss */
+    .clearfix::after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+
+    /* line 80, app/assets/stylesheets/pdf.scss */
+    .to {
+      margin-bottom: 10mm;
+    }
+
+    /* line 84, app/assets/stylesheets/pdf.scss */
+    .from {
+      float: right;
+      margin: 0;
+      margin-top: -30mm;
+      max-width: 15em;
+    }
+
+    /* line 91, app/assets/stylesheets/pdf.scss */
+    img.logo {
+      height: 2cm;
+      width: auto;
+      margin-bottom: 10mm;
+    }
+
+    /* line 97, app/assets/stylesheets/pdf.scss */
+    .header-spacer {
+      height: 3cm;
+    }
+
+    /* line 101, app/assets/stylesheets/pdf.scss */
+    p {
+      margin: 1em 0;
+    }
+
+    /* line 105, app/assets/stylesheets/pdf.scss */
+    table {
+      border-collapse: collapse;
+      margin-bottom: 1.5em;
+    }
+
+    /* line 111, app/assets/stylesheets/pdf.scss */
+    caption {
+      text-align: left;
+      padding-bottom: .5em;
+    }
+
+    /* line 115, app/assets/stylesheets/pdf.scss */
+    caption > *:last-child {
+      margin-bottom: 0;
+    }
+
+    /* line 120, app/assets/stylesheets/pdf.scss */
+    td,
+    th {
+      text-align: left;
+      vertical-align: top;
+      border: 1px solid #767676;
+      padding: .2rem .4rem;
+    }
+
+    /* line 128, app/assets/stylesheets/pdf.scss */
+    * + table {
+      -webkit-column-break-before: avoid;
+         -moz-column-break-before: avoid;
+              break-before: avoid;
+    }
+
+    /* line 132, app/assets/stylesheets/pdf.scss */
+    .no-break-inside {
+      -webkit-column-break-inside: avoid;
+         -moz-column-break-inside: avoid;
+              break-inside: avoid;
+    }
+
+    /* line 136, app/assets/stylesheets/pdf.scss */
+    .page-break {
+      -webkit-column-break-before: page;
+         -moz-column-break-before: page;
+              break-before: page;
+      height: 1px;
+      border: 0;
+      color: transparent;
+    }
+
+    /* line 144, app/assets/stylesheets/pdf.scss */
+    .page-content hr[data-page-break]:first-child {
+      display: none;
+    }
+
+    /* line 148, app/assets/stylesheets/pdf.scss */
+    .page-content div.page-break:first-child {
+      display: none;
+    }
+
+    /* line 152, app/assets/stylesheets/pdf.scss */
+    .signature {
+      font-family: 'Nothing You Could Do', cursive;
+      font-size: 2em;
+      white-space: nowrap;
+    }
+
+    /* line 158, app/assets/stylesheets/pdf.scss */
+    .text-small {
+      font-size: 10pt !important;
+    }
+
+    /* line 162, app/assets/stylesheets/pdf.scss */
+    .text-big {
+      font-size: 14pt !important;
+    }
+
+    /* line 166, app/assets/stylesheets/pdf.scss */
+    .sr-only, a[target]::after {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* line 179, app/assets/stylesheets/pdf.scss */
+    a[target]::after {
+      content: "\00a0opens in a new window";
+    }
+
+    @media print {
+      /* line 186, app/assets/stylesheets/pdf.scss */
+      a[target]::after {
+        content: none;
+      }
+    }
+
+    /* stylelint-enable color-no-hex */
+    /* stylelint-disable color-no-hex */
+    /* stylelint-enable color-no-hex */
+    /* line 3, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list {
+      margin: 1em 0;
+    }
+
+    /* line 6, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list .tree-list {
+      margin: 0;
+    }
+
+    /* line 11, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list__heading {
+      margin-bottom: .2em;
+    }
+
+    /* line 15, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list__definition {
+      margin-bottom: 0;
+      margin-left: 0;
+    }
+
+    /* line 20, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list__heading {
+      font-weight: bold;
+    }
+
+    /* line 25, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list .tree-list .tree-list__item {
+      margin-left: .5em;
+      padding-left: 1.5em;
+      border-left: 1px solid #A5C3CF;
+      position: relative;
+    }
+
+    /* line 32, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list .tree-list .tree-list__item:last-child {
+      border-left: 1px solid transparent;
+    }
+
+    /* line 36, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list .tree-list .tree-list__heading {
+      padding-top: 1em;
+    }
+
+    /* line 40, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list .tree-list .tree-list__heading::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      left: -1px;
+      height: 1.8em;
+      width: 1em;
+      margin-top: -1em;
+      border-left: 1px solid #A5C3CF;
+      border-bottom: 1px solid #A5C3CF;
+    }
+
+    /* line 52, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list .tree-list .tree-list__item:first-child {
+      margin-top: .5em;
+    }
+
+    /* line 55, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list .tree-list .tree-list__item:first-child > .tree-list__heading {
+      padding-top: 0;
+    }
+
+    /* line 58, app/assets/stylesheets/components/tree-list.scss */
+    .tree-list .tree-list .tree-list__item:first-child > .tree-list__heading::before {
+      margin-top: -.5em;
+      height: 1.3em;
+    }
+    </style>
+    <style>
+      body {
+        font: 11pt/1.5 'Open Sans', sans-serif;
+        --page-margin: 20mm 15mm 10mm 15mm;
+        overflow: visible;
+      }
+      
+      body[aria-busy=false] {
+        overflow: visible;
+      }
+      
+      dl {
+        /* fragmentor cannot do a column layout */
+        break-inside: avoid;
+      }
+      
+      dt {
+        font-weight: bold;
+      }
+      
+      dd {
+        margin-bottom: 0.5rem;
+        margin-left: 0;
+      }
+      
+      dl.property-list--columns {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+        margin-top: 0;
+      }
+      
+      dl > div {
+        break-inside: avoid;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin-top: 2em;
+        margin-bottom: 0.75rem;
+        break-after: avoid;
+      }
+      
+      h2 + p {
+        break-inside: avoid;
+        break-after: avoid;
+      }
+      
+      h3 {
+        font-size: 1rem;
+        line-height: 1.3;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        break-after: avoid;
+      }
+      
+      h4 {
+        font-size: 1rem;
+        line-height: 1.7;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        break-after: avoid;
+      }
+      
+      .cais-data h4 {
+        font-size: 1.1rem;
+      }
+      
+      .cais-data h3 {
+        font-size: 1.3rem;
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      
+      table thead {
+        font-weight: bold;
+        text-align: left;
+        background-color: #f0f0f0;
+        display: table-header-group;
+      }
+      
+      table td,
+      table th {
+        padding: 2px 8px;
+      }
+      
+      /* Try to avoid single table rows being broken onto their own page */
+      table > tbody > tr:nth-child(-n+3) {
+        break-before: avoid;
+      }
+      
+      table > tbody > tr:nth-last-child(-n+3) {
+        break-before: avoid;
+      }
+      
+      .ca__card {
+        background-color: #FFFFFF;
+        border: 1px solid #A5C3CF;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      
+      .ca__card--light {
+        border: 1px solid #B1B1B1;
+      }
+      
+      .ca-w-auto {
+        width: auto !important;
+      }
+      
+      .ca__card--light {
+        border: none;
+        padding: 0;
+        margin-bottom: 2rem;
+      }
+      
+      hr {
+        display: none;
+      }
+      
+      hr.pdf-only {
+        display: block;
+        margin-top: 2rem;
+        break-before: avoid;
+        border-bottom: none;
+      }
+    </style>
+</head>
+<body>
+<h1>Experian credit report</h1>
+<div class='ca__card ca__card--light'>
+<h2>Search details</h2>
+<p>Details given when your adviser asked for your report. Experian have used this to produce your report.</p>
+<dl class='property-list'>
+<dt>Name</dt>
+<dd>MISS PATRICIA FLOWERS</dd>
+<dt>Date of birth</dt>
+<dd>
+9 June 1982
+</dd>
+<dt>Current address</dt>
+<dd>38N CHARTERIS ROAD, LONDON, N4 3AB</dd>
+<dt>Requested on</dt>
+<dd>28 April 2022</dd>
+</dl>
+</div>
+
+<div class='ca__card ca__card--light'>
+<h2>Electoral roll information</h2>
+<p>The dates that your name was registered on the electoral roll and the addresses you were recorded at.</p>
+<div class='ca__card ca__card--light mt-2'>
+<h3>38N CHARTERIS ROAD, LONDON, N4 3AB</h3>
+<hr class='mt-0 mb-3'>
+<p>Applicant not recorded at this address on the electoral roll.</p>
+</div>
+<div class='ca__card ca__card--light mt-2'>
+<h3>HARDRIDING COTTAGES, BRIGHTON ROAD, PEASE POTTAGE, CRAWLEY, WEST SUSSEX, RH11 9AA</h3>
+<hr class='mt-0 mb-3'>
+<p>Applicant not recorded at this address on the electoral roll.</p>
+</div>
+<div class='ca__card ca__card--light mt-2'>
+<h3>25 CHURCH HILL, LONDON, E17 3AB</h3>
+<hr class='mt-0 mb-3'>
+<p>Applicant not recorded at this address on the electoral roll.</p>
+</div>
+</div>
+
+<div class='ca__card ca__card--light'>
+<h2>Aliases and Associations</h2>
+<p>
+An alias is any other name that you may have been previously known by on the financial accounts in your credit report.
+Associations are details of people who you share a financial connection with.
+</p>
+<p>No aliases and associations found</p>
+</div>
+
+<div class='ca__card ca__card--light'>
+<h2>Public Information</h2>
+<p>
+Includes any court judgements, debt relief orders, bankruptcies,
+individual voluntary arrangements or other similar public records.
+</p>
+<p>No public information found</p>
+</div>
+
+<div class='ca__card ca__card--light'>
+<h2>Address links</h2>
+<p>
+Created by lenders when you move or when you tell us your previous addresses.
+These are addresses that you have been connected with.
+</p>
+<dl class='tree-list'>
+<div class='tree-item'>
+<dt class='tree-list__heading'>38N CHARTERIS ROAD, LONDON, N4 3AB</dt>
+<dd class='tree-list__definition'>
+Current address
+<dl class='tree-list'>
+<div class='tree-list__item'>
+<dt class='tree-list__heading'>
+MISS PATRICIA MCGUINNESS FLOWERS
+-
+15A, 15 EALING ROAD, WEMBLEY, MIDDLESEX, HA0 4AA
+</dt>
+<dd class='tree-list__definition'>
+Linked
+to
+via a
+credit account
+on
+16 June 2019
+<dl class='tree-list'>
+<div class='tree-list__item'>
+<dt class='tree-list__heading'>
+MISS PATRICIA MCGUINNESS FLOWERS
+-
+25 CHURCH HILL, LONDON, E17 3AB
+</dt>
+<dd class='tree-list__definition'>
+Linked
+to
+via a
+credit account
+on
+20 May 2018
+<dl class='tree-list'>
+<div class='tree-list__item'>
+<dt class='tree-list__heading'>
+MISS PATRICIA MCGUINNESS FLOWERS
+-
+80 JOHN WILLIAM STREET, HUDDERSFIELD, HD1 5AA
+</dt>
+<dd class='tree-list__definition'>
+Linked
+to
+via a
+credit account
+on
+18 June 2017
+</dd>
+</div>
+</dl>
+
+</dd>
+</div>
+<div class='tree-list__item'>
+<dt class='tree-list__heading'>
+MISS PATRICIA FORB
+-
+HARDRIDING COTTAGES, BRIGHTON ROAD, PEASE POTTAGE, CRAWLEY, WEST SUSSEX, RH11 9AA
+</dt>
+<dd class='tree-list__definition'>
+Linked
+to
+via a
+credit account
+on
+3 June 2018
+<dl class='tree-list'>
+<div class='tree-list__item'>
+<dt class='tree-list__heading'>
+MISS PATRICIA FORB
+-
+25 CHURCH HILL, LONDON, E17 3AB
+</dt>
+<dd class='tree-list__definition'>
+Linked
+to
+via a
+credit account
+on
+8 April 2018
+</dd>
+</div>
+</dl>
+
+</dd>
+</div>
+<div class='tree-list__item'>
+<dt class='tree-list__heading'>
+MISS PATRICIA FORB
+-
+45 HOLLINGDEAN ROAD, BRIGHTON, BN2 4AA
+</dt>
+<dd class='tree-list__definition'>
+Linked
+from
+via a
+credit account
+on
+30 June 2019
+</dd>
+</div>
+</dl>
+
+</dd>
+</div>
+<div class='tree-list__item'>
+<dt class='tree-list__heading'>
+MISS PATRICIA MCGUINNESS FLOWERS
+-
+85-95 STOKE NEWINGTON ROAD, LONDON, N16 8AA
+</dt>
+<dd class='tree-list__definition'>
+Linked
+from
+via a
+credit account
+on
+28 June 2020
+<dl class='tree-list'>
+<div class='tree-list__item'>
+<dt class='tree-list__heading'>
+MISS PATRICIA MCGUINNESS FLOWERS
+-
+8 MUDFORD ROAD, YEOVIL, SOMERSET, BA21 4AA
+</dt>
+<dd class='tree-list__definition'>
+Linked
+from
+via a
+credit account
+on
+24 January 2021
+</dd>
+</div>
+</dl>
+
+</dd>
+</div>
+<div class='tree-list__item'>
+<dt class='tree-list__heading'>
+MISS PATRICIA FLOWERS
+-
+44A LUTON ROAD, FLAT 1, CHATHAM, KENT, ME4 5AB
+</dt>
+<dd class='tree-list__definition'>
+Linked
+from
+via a
+credit account
+on
+20 February 2022
+<dl class='tree-list'>
+<div class='tree-list__item'>
+<dt class='tree-list__heading'>
+MISS PATRICIA MCGUINNESS FLOWERS
+-
+37 LOWER ASHLEY, NEW MILTON, HANTS, BH25 5AA
+</dt>
+<dd class='tree-list__definition'>
+Linked
+to
+via a
+previous search
+on
+19 November 2021
+</dd>
+</div>
+<div class='tree-list__item'>
+<dt class='tree-list__heading'>
+MISS PATRICIA MCGUINNESS FLOWERS
+-
+8 MUDFORD ROAD, YEOVIL, SOMERSET, BA21 4AA
+</dt>
+<dd class='tree-list__definition'>
+Linked
+to
+via a
+credit account
+on
+26 December 2021
+</dd>
+</div>
+</dl>
+
+</dd>
+</div>
+</dl>
+
+</dd>
+</div>
+</dl>
+</div>
+
+<div class='ca__card ca__card--light cais-data'>
+<h2>Credit Account Details</h2>
+<p>Details of your credit agreements with lenders.</p>
+<div class='ca__card ca__card--light'>
+<h3>Record 1 - MISS PATRICA FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>9 June 1982</dd>
+<dt>Address</dt>
+<dd>38N CHARTERIS ROAD, LONDON, N4 3AB</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>FREEMANS PLC</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Mail Order</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Mail Order</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>8 January 2020</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Defaulted
+on
+14 August 2020
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>7838940591093460</dd>
+</div>
+<div>
+<dt>
+Balance
+</dt>
+<dd>£180</dd>
+</div>
+<div>
+<dt>Default balance</dt>
+<dd>£148</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>9 August 2020</dd>
+</div>
+<div>
+<dt>Repayments</dt>
+<dd>Per month</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>August 2020</td>
+<td>£180</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>July 2020</td>
+<td>£145</td>
+<td>4 months delinquent</td>
+</tr>
+<tr>
+<td>June 2020</td>
+<td>£142</td>
+<td>3 months delinquent</td>
+</tr>
+<tr>
+<td>May 2020</td>
+<td>£127</td>
+<td>2 months delinquent</td>
+</tr>
+<tr>
+<td>April 2020</td>
+<td>£112</td>
+<td>1 month delinquent</td>
+</tr>
+<tr>
+<td>March 2020</td>
+<td>£94</td>
+<td>Satisfactory</td>
+</tr>
+<tr>
+<td>February 2020</td>
+<td>£0</td>
+<td>Satisfactory</td>
+</tr>
+<tr>
+<td>January 2020</td>
+<td>£0</td>
+<td>Satisfactory</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='pdf-only'>
+</div>
+<div class='ca__card ca__card--light'>
+<h3>Record 2 - MISS PATRICIA FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>9 June 1982</dd>
+<dt>Address</dt>
+<dd>38N CHARTERIS ROAD, LONDON, N4 3AB</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>CLYDESDALE FINANCE</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Finance House</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Unsecured loan (personal loans etc)</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>30 January 2020</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Defaulted
+on
+15 August 2020
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>8711239894338730</dd>
+</div>
+<div>
+<dt>Default balance</dt>
+<dd>£815</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>20 March 2022</dd>
+</div>
+<div>
+<dt>Repayments</dt>
+<dd>£58 for 12 months</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>March 2022</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>February 2022</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>January 2022</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>December 2021</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>November 2021</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>October 2021</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>September 2021</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>August 2021</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>July 2021</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>June 2021</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>May 2021</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>April 2021</td>
+<td>£0</td>
+<td>Unknown</td>
+</tr>
+<tr>
+<td>March 2021</td>
+<td>£0</td>
+<td>Unknown</td>
+</tr>
+<tr>
+<td>February 2021</td>
+<td>£0</td>
+<td>Unknown</td>
+</tr>
+<tr>
+<td>January 2021</td>
+<td>£0</td>
+<td>Unknown</td>
+</tr>
+<tr>
+<td>December 2020</td>
+<td>£0</td>
+<td>Unknown</td>
+</tr>
+<tr>
+<td>November 2020</td>
+<td>£0</td>
+<td>Unknown</td>
+</tr>
+<tr>
+<td>October 2020</td>
+<td>£0</td>
+<td>Unknown</td>
+</tr>
+<tr>
+<td>September 2020</td>
+<td>£0</td>
+<td>Unknown</td>
+</tr>
+<tr>
+<td>August 2020</td>
+<td>£815</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>July 2020</td>
+<td>£793</td>
+<td>4 months delinquent</td>
+</tr>
+<tr>
+<td>June 2020</td>
+<td>£793</td>
+<td>3 months delinquent</td>
+</tr>
+<tr>
+<td>May 2020</td>
+<td>£748</td>
+<td>2 months delinquent</td>
+</tr>
+<tr>
+<td>April 2020</td>
+<td>£725</td>
+<td>1 month delinquent</td>
+</tr>
+<tr>
+<td>March 2020</td>
+<td>£660</td>
+<td>Satisfactory</td>
+</tr>
+<tr>
+<td>February 2020</td>
+<td>£699</td>
+<td>Unclassified</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='pdf-only'>
+</div>
+<div class='ca__card ca__card--light'>
+<h3>Record 3 - MISS PATRICIA FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>9 June 1982</dd>
+<dt>Address</dt>
+<dd>38N CHARTERIS ROAD, LONDON, N4 3AB</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>GRATTAN PLC</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Mail Order</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Mail Order</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>26 December 2019</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Defaulted
+on
+29 June 2020
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>4020764603359420</dd>
+</div>
+<div>
+<dt>
+Balance
+</dt>
+<dd>£181</dd>
+</div>
+<div>
+<dt>Default balance</dt>
+<dd>£149</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>12 July 2020</dd>
+</div>
+<div>
+<dt>Repayments</dt>
+<dd>Per month</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>July 2020</td>
+<td>£181</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>June 2020</td>
+<td>£147</td>
+<td>4 months delinquent</td>
+</tr>
+<tr>
+<td>May 2020</td>
+<td>£144</td>
+<td>3 months delinquent</td>
+</tr>
+<tr>
+<td>April 2020</td>
+<td>£129</td>
+<td>2 months delinquent</td>
+</tr>
+<tr>
+<td>March 2020</td>
+<td>£115</td>
+<td>1 month delinquent</td>
+</tr>
+<tr>
+<td>February 2020</td>
+<td>£115</td>
+<td>1 month delinquent</td>
+</tr>
+<tr>
+<td>January 2020</td>
+<td>£0</td>
+<td>Satisfactory</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='pdf-only'>
+</div>
+<div class='ca__card ca__card--light'>
+<h3>Record 4 - MISS PATRICIA FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>9 June 1982</dd>
+<dt>Address</dt>
+<dd>38N CHARTERIS ROAD, LONDON, N4 3AB</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>LOWELL PORTFOLIO I LTD</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Finance House</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Communications</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>21 November 2018</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Defaulted
+on
+10 June 2020
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>7569528920510260</dd>
+</div>
+<div>
+<dt>Default balance</dt>
+<dd>£2,091</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>2 May 2021</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>May 2021</td>
+<td>£2,091</td>
+<td>Default</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='pdf-only'>
+</div>
+<div class='ca__card ca__card--light'>
+<h3>Record 5 - MISS PATRICIA FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>9 June 1982</dd>
+<dt>Address</dt>
+<dd>38N CHARTERIS ROAD, LONDON, N4 3AB</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>EXPRESS GIFTS</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Mail Order</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Mail Order</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>6 January 2020</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Defaulted
+on
+2 August 2020
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>5379880746731250</dd>
+</div>
+<div>
+<dt>Default balance</dt>
+<dd>£121</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>17 April 2022</dd>
+</div>
+<div>
+<dt>Repayments</dt>
+<dd>Per periodically</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>April 2022</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>March 2022</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>February 2022</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>January 2022</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>December 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>November 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>October 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>September 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>August 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>July 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>June 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>May 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>April 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>March 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>February 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>January 2021</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>December 2020</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>November 2020</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>October 2020</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>September 2020</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>August 2020</td>
+<td>£121</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>July 2020</td>
+<td>£121</td>
+<td>4 months delinquent</td>
+</tr>
+<tr>
+<td>June 2020</td>
+<td>£121</td>
+<td>4 months delinquent</td>
+</tr>
+<tr>
+<td>May 2020</td>
+<td>£121</td>
+<td>2 months delinquent</td>
+</tr>
+<tr>
+<td>April 2020</td>
+<td>£121</td>
+<td>1 month delinquent</td>
+</tr>
+<tr>
+<td>March 2020</td>
+<td>£121</td>
+<td>Satisfactory</td>
+</tr>
+<tr>
+<td>February 2020</td>
+<td>£121</td>
+<td>Satisfactory</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Credit limit history
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<th>Date</th>
+<th>
+Credit limit
+</th>
+</thead>
+<tbody>
+<tr>
+<td>July 2020</td>
+<td>£125</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='pdf-only'>
+</div>
+<div class='ca__card ca__card--light'>
+<h3>Record 6 - MISS PATRICIA FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>9 June 1982</dd>
+<dt>Address</dt>
+<dd>38N CHARTERIS ROAD, LONDON, N4 3AB</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>LOWELL PORTFOLIO I LTD</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Finance House</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Mail Order</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>26 December 2019</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Defaulted
+on
+16 July 2020
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>2793036495150640</dd>
+</div>
+<div>
+<dt>Default balance</dt>
+<dd>£177</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>18 October 2020</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>October 2020</td>
+<td>£177</td>
+<td>Default</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='pdf-only'>
+</div>
+<div class='ca__card ca__card--light'>
+<h3>Record 7 - MISS PAT FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>13 March 2002</dd>
+<dt>Address</dt>
+<dd>8 MUDFORD ROAD, YEOVIL, SOMERSET, BA21 4AA</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>LOWELL PORTFOLIO I LTD</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Finance House</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Mail Order</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>19 October 2020</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Defaulted
+on
+20 May 2021
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>2281064479907630</dd>
+</div>
+<div>
+<dt>Default balance</dt>
+<dd>£174</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>11 July 2021</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>July 2021</td>
+<td>£174</td>
+<td>Default</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='pdf-only'>
+</div>
+<div class='ca__card ca__card--light'>
+<h3>Record 8 - MISS PATRICIA FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>9 June 1982</dd>
+<dt>Address</dt>
+<dd>8 MUDFORD ROAD, YEOVIL, SOMERSET, BA21 4AA</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>CASHPLUS</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Finance House</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Current account</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>5 July 2021</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Active
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>2664032037825070</dd>
+</div>
+<div>
+<dt>
+Overdraft
+limit
+</dt>
+<dd>£50</dd>
+</div>
+<div>
+<dt>
+Balance
+(overdraft)
+</dt>
+<dd>£51</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>20 March 2022</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+(overdraft)
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>March 2022</td>
+<td>£51</td>
+<td>6 months delinquent</td>
+</tr>
+<tr>
+<td>February 2022</td>
+<td>£51</td>
+<td>6 months delinquent</td>
+</tr>
+<tr>
+<td>January 2022</td>
+<td>£96</td>
+<td>6 months delinquent</td>
+</tr>
+<tr>
+<td>December 2021</td>
+<td>£96</td>
+<td>5 months delinquent</td>
+</tr>
+<tr>
+<td>November 2021</td>
+<td>£96</td>
+<td>4 months delinquent</td>
+</tr>
+<tr>
+<td>October 2021</td>
+<td>£96</td>
+<td>3 months delinquent</td>
+</tr>
+<tr>
+<td>September 2021</td>
+<td>£96</td>
+<td>2 months delinquent</td>
+</tr>
+<tr>
+<td>August 2021</td>
+<td>£66</td>
+<td>1 month delinquent</td>
+</tr>
+<tr>
+<td>July 2021</td>
+<td>£0</td>
+<td>Satisfactory</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='pdf-only'>
+</div>
+<div class='ca__card ca__card--light'>
+<h3>Record 9 - MRS PARTICIA FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>9 June 1982</dd>
+<dt>Address</dt>
+<dd>37 LOWER ASHLEY, NEW MILTON, HANTS, BH25 5AA</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>SHOP DIRECT FINANCE COMPANY LTD</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Mail Order</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Mail Order</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>11 November 2021</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Active
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>6679756527302320</dd>
+</div>
+<div>
+<dt>
+Credit
+limit
+</dt>
+<dd>£250</dd>
+</div>
+<div>
+<dt>
+Balance
+</dt>
+<dd>£370</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>20 March 2022</dd>
+</div>
+<div>
+<dt>Repayments</dt>
+<dd>Per month</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>March 2022</td>
+<td>£370</td>
+<td>4 months delinquent</td>
+</tr>
+<tr>
+<td>February 2022</td>
+<td>£304</td>
+<td>2 months delinquent</td>
+</tr>
+<tr>
+<td>January 2022</td>
+<td>£255</td>
+<td>1 month delinquent</td>
+</tr>
+<tr>
+<td>December 2021</td>
+<td>£71</td>
+<td>Unclassified</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='pdf-only'>
+</div>
+<div class='ca__card ca__card--light'>
+<h3>Record 10 - MISS PATRICIA FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>9 June 1982</dd>
+<dt>Address</dt>
+<dd>37 LOWER ASHLEY, NEW MILTON, HANTS, BH25 5AA</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>CABOT CREDIT MANAGEMENT GROUP LIMITED</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Finance House</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Mail Order</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>26 December 2019</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Defaulted
+on
+5 July 2020
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>3280990601291650</dd>
+</div>
+<div>
+<dt>Default balance</dt>
+<dd>£261</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>20 March 2022</dd>
+</div>
+<div>
+<dt>Repayments</dt>
+<dd>Per month</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>March 2022</td>
+<td>£261</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>February 2022</td>
+<td>£261</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>January 2022</td>
+<td>£261</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>December 2021</td>
+<td>£261</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>November 2021</td>
+<td>£261</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>October 2021</td>
+<td>£261</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>September 2021</td>
+<td>£261</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>August 2021</td>
+<td>£261</td>
+<td>Default</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='pdf-only'>
+</div>
+<div class='ca__card ca__card--light'>
+<h3>Record 11 - MS PATRICA FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>9 June 1981</dd>
+<dt>Address</dt>
+<dd>37 LOWER ASHLEY, NEW MILTON, HANTS, BH25 5AA</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>CASHEURONETUK,LLC</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Finance House</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Unsecured loan (personal loans etc)</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>27 September 2021</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Defaulted
+on
+23 February 2022
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>6890923814876510</dd>
+</div>
+<div>
+<dt>Default balance</dt>
+<dd>£800</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>6 March 2022</dd>
+</div>
+<div>
+<dt>Repayments</dt>
+<dd>£962 per fortnightly</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>March 2022</td>
+<td>£800</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>February 2022</td>
+<td>£779</td>
+<td>Satisfactory</td>
+</tr>
+<tr>
+<td>January 2022</td>
+<td>£683</td>
+<td>Satisfactory</td>
+</tr>
+<tr>
+<td>December 2021</td>
+<td>£584</td>
+<td>1 month delinquent</td>
+</tr>
+<tr>
+<td>November 2021</td>
+<td>£400</td>
+<td>Satisfactory</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr class='pdf-only'>
+</div>
+<div class='ca__card ca__card--light'>
+<h3>Record 12 - MISS PATRICIA FLOWERS</h3>
+<dl class='property-list'>
+<dt>Date of birth</dt>
+<dd>9 June 1982</dd>
+<dt>Address</dt>
+<dd>15A, 15 EALING ROAD, WEMBLEY, MIDDLESEX, HA0 4AA</dd>
+</dl>
+<hr class='mt-0 mb-3'>
+<h4>Account summary</h4>
+<dl class='property-list property-list--columns'>
+<div>
+<dt>Company name</dt>
+<dd>LOWELL PORTFOLIO I LTD</dd>
+</div>
+<div>
+<dt>Company type</dt>
+<dd>Finance House</dd>
+</div>
+<div>
+<dt>Account type</dt>
+<dd>Communications</dd>
+</div>
+<div>
+<dt>Account started on</dt>
+<dd>20 August 2018</dd>
+</div>
+<div>
+<dt>Account status</dt>
+<dd>
+Defaulted
+on
+2 August 2020
+</dd>
+</div>
+<div>
+<dt>Account number</dt>
+<dd>5215333619081470</dd>
+</div>
+<div>
+<dt>
+Balance
+</dt>
+<dd>£231</dd>
+</div>
+<div>
+<dt>Default balance</dt>
+<dd>£232</dd>
+</div>
+<div>
+<dt>Last updated date</dt>
+<dd>2 May 2021</dd>
+</div>
+</dl>
+
+<hr class='mt-0 mb-3'>
+<h4>
+Account balances
+</h4>
+<div class='table-responsive'>
+<table class='table table-borderless ca-w-auto'>
+<thead>
+<tr>
+<th>Month</th>
+<th>Balance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>May 2021</td>
+<td>£231</td>
+<td>Default</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+
+</body>
+<footer>
+Page
+<span class='page-count'></span>
+</footer>
+</html>

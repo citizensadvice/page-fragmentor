@@ -2,12 +2,18 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
-  <title>Text node</title>
+  <title>Disable line box breaking</title>
   <link href="../styles/styles.css" rel="stylesheet">
   <script src="../src/auto.js"></script>
   <style>
     html {
       --page-size: A5;
+      --orphans: 0;
+      --widows: 0;
+    }
+
+    p {
+      border: 1px solid red;
     }
 
     .page-content {

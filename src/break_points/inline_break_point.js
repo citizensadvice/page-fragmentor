@@ -17,6 +17,7 @@ export class InlineBreakPoint extends BaseBreakPoint {
   constructor(...args) {
     super(...args);
     this.nodes = [];
+    this.type = 'inline';
   }
 
   get overflowing() {
@@ -25,6 +26,11 @@ export class InlineBreakPoint extends BaseBreakPoint {
   }
 
   range(disableBreakRules = []) {
+    const { widows, orphans } = this.containerRules;
+    if (widows === 0 && orphans === 0) {
+      return null;
+    }
+
     if (!disableBreakRules.includes(4) && this.containerRules.breakInsideAvoid) {
       return null;
     }
@@ -92,6 +98,10 @@ export class InlineBreakPoint extends BaseBreakPoint {
       }
 
       lineBoxes = lineBoxes.slice(orphans);
+    }
+
+    if (lineBoxes.length === 1) {
+      return null;
     }
 
     return lineBoxes[lineBoxes.length - widows] || null;

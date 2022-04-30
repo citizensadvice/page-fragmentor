@@ -25,6 +25,18 @@ export class SiblingBreakPoint extends BaseBreakPoint {
       || this.trailingNodes.some((node) => ['avoid', 'avoid-page'].includes(this.nodeRules.get(node).breakAfter));
   }
 
+  get bottom() {
+    let bottom = 0;
+    for (const node of this.trailingNodes) {
+      const nodeBottom = this.getBottom(node);
+      if (nodeBottom < bottom) {
+        return bottom;
+      }
+      bottom = nodeBottom;
+    }
+    return bottom;
+  }
+
   range(disableBreakRules = []) {
     const { node, force, avoid } = this;
 
@@ -51,7 +63,7 @@ export class SiblingBreakPoint extends BaseBreakPoint {
   // ---------
 
   get node() {
-    return this.trailingNodes[this.trailingNodes.length - 1];
+    return this.trailingNodes[0];
   }
 
   hasLeadingOverflow(node) {
@@ -59,10 +71,13 @@ export class SiblingBreakPoint extends BaseBreakPoint {
     return rect.top > this.rootRect.bottom;
   }
 
-  hasTrailingOverflow(node) {
+  getBottom(node) {
     const rect = this.rectFilter.get(node);
     const style = node.nodeType === Node.ELEMENT_NODE ? window.getComputedStyle(node) : {};
-    const bottom = Math.ceil(rect.bottom + (parseFloat(style.marginBottom) || 0));
-    return bottom > Math.floor(this.rootRect.bottom);
+    return Math.ceil(rect.bottom + (parseFloat(style.marginBottom) || 0));
+  }
+
+  hasTrailingOverflow(node) {
+    return this.getBottom(node) > Math.floor(this.rootRect.bottom);
   }
 }

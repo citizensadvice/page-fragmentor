@@ -1,0 +1,21 @@
+# TODO
+
+- [x] should not break if there is a single line box
+  - [x] code
+  - [x] test
+- [x] should not inline break if there is no overflow, but the next sibling break has overflow 
+  - [x] code
+  - [x] test
+- [x] improve sub / sup spacing in Chrome / Edge
+- [x] styles for no break inside headings
+- [ ] no break points allowed inside a table row, unless if has a single column
+  - [x] Support CSS table
+  - [ ] Support heading repeats on a css table
+  - [ ] Support caption side
+  - [ ] tests
+- [x] add a way to skip sibling / orphan calculations
+- [x] check bottom of a sibling break point is being accounted for
+- [ ] when relaxing rule 2, relax in order of depth
+- [ ] support for box-decoration-break
+  - [ ] relaxation rules include dropping cloned margins
+- [ ] Sort out credit report line breaks

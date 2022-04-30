@@ -142,8 +142,10 @@ Supported properties:
 - [`break-before`][10]: supports `auto`, `avoid` and `page`. Other values will be treated as `auto`.
 - [`break-after`][11]: supports `auto`, `avoid` and `page`. Other values will be treated as `auto`.
 - [`break-inside`][12]: supports `auto` and `avoid`. Other values will be treated as `auto`.
-- [`widows`][13]: Firefox does not support widows, use `--widows` instead. Default is 2. The value must be >= 1
-- [`orphans`][14]: Firefox does not support orphans, use `--orphans` instead. Default is 2. The value must be >= 1
+- [`widows`][13]: Firefox does not support widows, use `--widows` instead. Default is 2.
+- [`orphans`][14]: Firefox does not support orphans, use `--orphans` instead. Default is 2.
+
+Setting orphans and widows to '0' will turn off breaking between line boxes. This can give a performance boost where this isn't required.
 
 ### Tables
 

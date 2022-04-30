@@ -27,7 +27,7 @@ export function* breakPointGenerator(root) {
           yield currentBreakPoint;
 
           currentBreakPoint = new SiblingBreakPoint({ root, nodeRules, rectFilter });
-          currentBreakPoint.trailingNodes.push(lastBreakPoint.lastNode);
+          currentBreakPoint.trailingNodes.unshift(lastBreakPoint.lastNode);
         }
         currentBreakPoint.leadingNodes.push(node);
         break;
@@ -50,7 +50,7 @@ export function* breakPointGenerator(root) {
           yield currentBreakPoint;
           currentBreakPoint = new SiblingBreakPoint({ root, nodeRules, rectFilter });
         }
-        currentBreakPoint.trailingNodes.push(node);
+        currentBreakPoint.trailingNodes.unshift(node);
         break;
       }
 
@@ -64,6 +64,5 @@ export function* breakPointGenerator(root) {
   yield currentBreakPoint;
 
   // If the last node is a text node and we are overflowing we may need to force a breakpoint
-  currentBreakPoint = new BaseBreakPoint({ root, nodeRules, rectFilter });
-  yield currentBreakPoint;
+  yield new BaseBreakPoint({ root, nodeRules, rectFilter });
 }

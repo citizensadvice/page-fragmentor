@@ -5,6 +5,26 @@
   <title>Page layout test</title>
   <link href="../styles/styles.css" rel="stylesheet">
   <script src="../src/auto.js"></script>
+  <style>
+    sub {
+      /* The default rendering in Chromium results in very different spacing to other browsers */
+      vertical-align: baseline;
+      position: relative;
+      top: 0.2em;
+    }
+
+    sup {
+      /* The default rendering in Chromium results in very different spacing to other browsers */
+      vertical-align: baseline;
+      position: relative;
+      top: -0.2em;
+    }
+
+    kbd {
+      /* The default font is different, and therefore a different size in different browsers */ 
+      font-family: 'Courier New', monospace;
+    }
+  </style>
 <body>
 <main>
   <p style="line-height: 1.5">
