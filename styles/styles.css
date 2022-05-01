@@ -23,7 +23,7 @@ body {
 }
 
 /* Display friendly generating message */
-/*
+
 body[aria-busy=true] * {
   opacity: 0 !important;
 }
@@ -37,7 +37,6 @@ body[aria-busy=true]:after {
   font-size: 2em;
   text-align: center;
 }
-*/
 
 * {
   /* Force specified font size on iOS */

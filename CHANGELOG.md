@@ -5,8 +5,9 @@
 - Fix infinite loop with large areas of break-inside avoid
 - Line box breaking can be disabled by setting `--widows` and `--orphans` to `0`
 - Default styles now include `break-inside: avoid` for headings
-- No break-points will not occur between table rows, including css tables, and not within table cells
-- Better algorithm for relaxing breaking-inside avoid allows nested break-inside rules to be obeyed
+- No break-points will not occur within a table rows, including css tables
+- Better algorithm for `break-inside: avoid` where a forced break is required
+- `data-fragmented-start` and `data-framented-end` will be added to all fragmented elements and not just the top ancenstor
 
 ## v1.0.0
 

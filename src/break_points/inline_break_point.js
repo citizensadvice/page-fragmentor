@@ -31,8 +31,9 @@ export class InlineBreakPoint extends BaseBreakPoint {
       return null;
     }
 
-    console.log('inline', disableRules, avoidDepth, this.containerRules.breakInsideAvoid);
-    if (!(disableRules.includes(4) && this.containerRules.breakInsideAvoid <= avoidDepth) && this.containerRules.breakInsideAvoid) {
+    if (!(disableRules.includes(4) && this.containerRules.breakInsideAvoid <= avoidDepth)
+      && this.containerRules.breakInsideAvoid
+    ) {
       return null;
     }
 

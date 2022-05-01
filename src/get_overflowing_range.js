@@ -25,7 +25,6 @@ export function getOverflowingRange(root) {
       // Retrying with relaxed rules
       // https://www.w3.org/TR/css-break-3/#unforced-breaks
       for (const disableRules of ruleDisablerGenerator(breakPoints)) {
-        console.log(disableRules);
         for (const previousBreakPoint of breakPoints) {
           const range = previousBreakPoint.range(disableRules);
           if (range) {

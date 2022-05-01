@@ -9,17 +9,16 @@ export class FragmentedExtractor {
     if (node.nodeType === Node.TEXT_NODE) {
       node = node.parentNode;
     }
-    node = node.closest('.page-content > *');
-    if (node) {
+    while (node && !node.matches('.page-content')) {
       node.dataset.fragmentedStart = 'true';
+      node = node.parentNode;
     }
   }
 
   after(fragment) {
-    const node = fragment.querySelector('[data-fragmented-start=true]');
-    if (node) {
+    fragment.querySelectorAll('[data-fragmented-start=true]').forEach((node) => {
       delete node.dataset.fragmentedStart;
       node.dataset.fragmentedEnd = 'true';
-    }
+    });
   }
 }

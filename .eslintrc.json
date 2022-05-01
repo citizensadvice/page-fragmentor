@@ -15,7 +15,8 @@
     "no-underscore-dangle": "off",
     "no-restricted-syntax": "off",
     "no-return-assign": ["error", "except-parens"],
-    "object-curly-newline": ["error", { "consistent": true }]
+    "object-curly-newline": ["error", { "consistent": true }],
+    "no-param-reassign": ["error", { "props": false }]
   },
   "overrides": [
     {
