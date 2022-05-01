@@ -232,6 +232,11 @@
     /* line 3, app/assets/stylesheets/components/tree-list.scss */
     .tree-list {
       margin: 1em 0;
+      break-inside: auto;
+    }
+
+    .tree-item {
+      break-inside: auto;
     }
 
     /* line 6, app/assets/stylesheets/components/tree-list.scss */
@@ -266,6 +271,10 @@
     /* line 32, app/assets/stylesheets/components/tree-list.scss */
     .tree-list .tree-list .tree-list__item:last-child {
       border-left: 1px solid transparent;
+    }
+
+    [data-fragmented-start=true] .tree-list .tree-list .tree-list__item:last-child {
+      border-left: 1px solid #A5C3CF;
     }
 
     /* line 36, app/assets/stylesheets/components/tree-list.scss */

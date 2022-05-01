@@ -37,19 +37,28 @@ export class SiblingBreakPoint extends BaseBreakPoint {
     return bottom;
   }
 
-  range(disableBreakRules = []) {
+  range({ disableRules = [], avoidDepth = 0 } = {}) {
     const { node, force, avoid } = this;
 
-    if (!node || (node === Node.ELEMENT_NODE && node.matches('td,th'))) {
+    if (!node || node === Node.ELEMENT_NODE) {
       return null;
     }
-    if (!force
-      && !disableBreakRules.includes(2)
-      && this.nodeRules.get(node).breakInsideParentAvoid
-    ) {
+
+    // if (!force
+    //   && this.nodeRules.get(node).breakInsideParentAvoid
+    //   && this.nodeRules.get(node).breakInsideParentAvoid >= avoidDepth
+    // ) {
+    //   return null;
+    // }
+
+    console.log(disableRules, avoidDepth, this.nodeRules.get(node).breakInsideParentAvoid);
+    console.log(this.nodeRules.get(node).breakInsideParentAvoid > avoidDepth);
+
+    if (!force && this.nodeRules.get(node).breakInsideParentAvoid > avoidDepth) {
+      console.log('avoided');
       return null;
     }
-    if (!force && !disableBreakRules.includes(1) && avoid) {
+    if (!force && !disableRules.includes(1) && avoid) {
       return null;
     }
 

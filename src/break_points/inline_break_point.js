@@ -25,17 +25,18 @@ export class InlineBreakPoint extends BaseBreakPoint {
     return rect.top > this.rootRect.bottom;
   }
 
-  range(disableBreakRules = []) {
+  range({ disableRules = [], avoidDepth = 0 } = {}) {
     const { widows, orphans } = this.containerRules;
     if (widows === 0 && orphans === 0) {
       return null;
     }
 
-    if (!disableBreakRules.includes(4) && this.containerRules.breakInsideAvoid) {
+    console.log('inline', disableRules, avoidDepth, this.containerRules.breakInsideAvoid);
+    if (!(disableRules.includes(4) && this.containerRules.breakInsideAvoid <= avoidDepth) && this.containerRules.breakInsideAvoid) {
       return null;
     }
 
-    const lineBoxRange = this.findLineBoxRange(disableBreakRules.includes(3));
+    const lineBoxRange = this.findLineBoxRange(disableRules.includes(3));
     const overflowingNodeRange = this.findFirstOverflowingNodeRange();
 
     let overflowing = lineBoxRange || overflowingNodeRange;

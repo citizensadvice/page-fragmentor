@@ -12,7 +12,7 @@ function* iterateLevel(walker, inline = false) {
 
     yield [isInline ? 'inline' : 'enter', currentNode];
 
-    if (currentNode.matches('tr') || window.getComputedStyle(currentNode).display === 'table-row') {
+    if (window.getComputedStyle(currentNode).display === 'table-row') {
       // do nothing - breaking within a table row is not supported
     } else if (!currentNode.matches('picture,video,canvas,object,audio,embed,iframe,svg,math') && walker.firstChild()) {
       yield* iterateLevel(walker, isInline);
