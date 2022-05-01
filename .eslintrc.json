@@ -1,11 +1,11 @@
 {
-  "parser": "babel-eslint",
   "extends": "airbnb-base",
-  "plugins": [
-    "babel"
-  ],
   "env": {
-    "browser": true
+    "browser": true,
+    "es2022": true
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest"
   },
   "rules": {
     "class-methods-use-this": "off",
