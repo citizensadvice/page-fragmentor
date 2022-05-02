@@ -1,6 +1,6 @@
 # Change log
 
-## v2.0.0-rc.1
+## v2.0.0-alpha.1
 
 - Fix infinite loop with large areas of break-inside avoid
 - Line box breaking can be disabled by setting `--widows` and `--orphans` to `0`
