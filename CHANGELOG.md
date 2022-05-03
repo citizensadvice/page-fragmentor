@@ -1,5 +1,9 @@
 # Change log
 
+## v2.0.0-alpha.2
+
+- Fix parent margin, padding and borders not being accounted for when fragmenting
+
 ## v2.0.0-alpha.1
 
 - Fix infinite loop with large areas of break-inside avoid
