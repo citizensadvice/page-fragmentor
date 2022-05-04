@@ -1,14 +1,6 @@
 import { BaseBreakPoint } from './base_break_point';
 import { lineBoxGenerator } from '../generators/line_box_generator';
-
-function calculateBottomSpace(container) {
-  const style = window.getComputedStyle(container);
-  const size = (parseFloat(style.paddingBottom) || 0)
-    + (parseFloat(style.borderBottomWidth) || 0)
-    + (parseFloat(style.marginBottom) || 0);
-
-  return Math.ceil(Math.max(size, 0));
-}
+import { getMargin } from '../get_margin';
 
 /**
  * Represents a class B breakpoint
@@ -114,7 +106,7 @@ export class InlineBreakPoint extends BaseBreakPoint {
   findFirstOverflowingNodeRange() {
     const foundNode = this.nodes.find((node) => {
       const rect = this.rectFilter.get(node);
-      return rect.bottom > (this.rootRect.bottom - this.bottomSpace);
+      return rect.bottom > (this.rootRect.bottom - getMargin(node, this.root));
     });
 
     if (!foundNode || foundNode.nodeType === Node.TEXT_NODE || foundNode === this.firstNode) {
@@ -141,7 +133,7 @@ export class InlineBreakPoint extends BaseBreakPoint {
   }
 
   get bottomSpace() {
-    return (this._bottomSpace ??= calculateBottomSpace(this.container));
+    return (this._bottomSpace ??= getMargin(this.container, this.root, true));
   }
 
   get containerRules() {

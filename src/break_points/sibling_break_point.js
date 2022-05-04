@@ -1,4 +1,5 @@
 import { BaseBreakPoint } from './base_break_point';
+import { getMargin } from '../get_margin';
 
 /**
  * Represents a class A breakpoint
@@ -71,23 +72,9 @@ export class SiblingBreakPoint extends BaseBreakPoint {
 
   getBottom(node) {
     const rect = this.rectFilter.get(node);
-    const style = node.nodeType === Node.ELEMENT_NODE ? window.getComputedStyle(node) : {};
     return Math.ceil(
-      rect.bottom + (parseFloat(style.marginBottom) || 0) + this.getParentMargins(node),
+      rect.bottom + getMargin(node, this.root),
     );
-  }
-
-  getParentMargins(node) {
-    let bottom = 0;
-    let cursor = node.parentNode;
-    while (cursor && !cursor.contains(this.root)) {
-      const style = window.getComputedStyle(cursor);
-      bottom += parseFloat(style.paddingBottom) || 0;
-      bottom += parseFloat(style.marginBottom) || 0;
-      bottom += parseFloat(style.borderBottomWidth) || 0;
-      cursor = cursor.parentNode;
-    }
-    return bottom;
   }
 
   hasTrailingOverflow(node) {
