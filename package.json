@@ -1,12 +1,12 @@
 {
   "name": "@citizensadvice/page-fragmenter",
-  "version": "2.0.0-alpha.5",
+  "version": "2.0.0-alpha.6",
   "description": "Split a HTML page into printable pages",
   "scripts": {
     "test": "jest",
     "lint": "eslint . --ext .js",
     "start": "parcel test/index.html --dist-dir local",
-    "prebuild": "rm -rf dist",
+    "prebuild": "rm -rf dist && rm -rf .parcel-cache",
     "build": "npm run build:main && npm run build:auto",
     "build:main": "parcel build src/index.js",
     "build:auto": "parcel build src/auto.js",

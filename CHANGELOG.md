@@ -1,6 +1,6 @@
 # Change log
 
-## v2.0.0-alpha.5
+## v2.0.0-alpha.6
 
 - Fix parent margin, padding and borders not being accounted for when fragmenting
 
