@@ -14,9 +14,10 @@ function fixTable(table) {
 
   // Fix the widths of the columns
   [...table.querySelectorAll('col')].forEach((col) => {
-    const rect = col.getBoundingClientRect();
-    // eslint-disable-next-line no-param-reassign
-    col.style.width = `${rect.width}px`;
+    const { width } = col.getBoundingClientRect();
+    if (width) {
+      col.style.width = `${Math.ceil(width)}px`;
+    }
   });
 }
 
