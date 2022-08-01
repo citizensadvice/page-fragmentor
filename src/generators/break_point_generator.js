@@ -13,6 +13,8 @@ import { NodeRules } from '../caches/node_rule_cache';
  */
 export function* breakPointGenerator(root) {
   const rectFilter = new RectFilter();
+  // Fix for older versions of safari
+  rectFilter.acceptNode = rectFilter.acceptNode.bind(rectFilter);
   const nodeIterator = nodeGenerator(root, rectFilter);
   const nodeRules = new NodeRules();
 

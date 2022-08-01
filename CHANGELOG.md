@@ -1,5 +1,9 @@
 # Change log
 
+## v2.0.0-alpha.8
+
+- Fix crashes with older Safari
+
 ## v2.0.0-alpha.7
 
 - Fix parent margin, padding and borders not being accounted for when fragmenting
