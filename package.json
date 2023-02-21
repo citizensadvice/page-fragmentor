@@ -36,5 +36,8 @@
     "np": "^7.4.0",
     "parcel": "^2.0.0-nightly.626",
     "playwright": "^1.21.1"
+  },
+  "np": {
+    "yarn": false
   }
 }
