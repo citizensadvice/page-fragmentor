@@ -35,6 +35,6 @@
     "jest-playwright-preset": "^1.5.1",
     "np": "^7.4.0",
     "parcel": "^2.0.0-nightly.626",
-    "playwright": "^1.9.2"
+    "playwright": "^1.55.1"
   }
 }
