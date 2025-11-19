@@ -8,6 +8,7 @@
 - Updated eslint to flat config
 - Added prettier
 - Fixed size keywords should not be case sensitive
+- Added github actions, codeowners and dependabot
 
 ## v2.0.0-alpha.8
 
