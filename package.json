@@ -13,9 +13,8 @@
     "start": "npm run cache:clear && parcel test/index.html",
     "prebuild": "rm -rf dist && rm -rf .parcel-cache",
     "build": "parcel build test/index.html --no-cache",
-    "deploy": "npm run build -- --public-url \"/page-fragmenter/\" && gh-pages -d .gh-pages",
+    "deploy": "parcel build test/index.html --no-cache --public-url \"/page-fragmenter/\" && gh-pages -d .gh-pages",
     "preversion": "npm run lint",
-    "prepublishOnly": "npm run build",
     "postpublish": "npm run deploy",
     "release": "npx np --any-branch"
   },

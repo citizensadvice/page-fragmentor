@@ -218,11 +218,19 @@ npm install
 npm start
 # Visit http://localhost:1234
 
+# Lint
+npm lint
+
 # Test
+npx playwright install --with-deps
 npm test
 
 # Build
 npm build
+
+# Deploy new version
+# Create a release branch
+npx np --any-branch
 ```
 
 [1]: https://thecodingmachine.github.io/gotenberg/
