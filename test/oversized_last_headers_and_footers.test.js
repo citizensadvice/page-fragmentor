@@ -1,4 +1,6 @@
-it('is two pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('is two pages', async ({ page }) => {
   await page.goto(
     'http://localhost:1234/oversized_last_headers_and_footers.html',
     { waitUntil: 'load' },
@@ -6,7 +8,7 @@ it('is two pages', async () => {
   expect(await page.$$('.page')).toHaveLength(2);
 });
 
-it('has no content on last page', async () => {
+test('has no content on last page', async ({ page }) => {
   await page.goto(
     'http://localhost:1234/oversized_last_headers_and_footers.html',
     { waitUntil: 'load' },
@@ -20,7 +22,7 @@ it('has no content on last page', async () => {
   ).toEqual('');
 });
 
-it('has headers and footers only on last page', async () => {
+test('has headers and footers only on last page', async ({ page }) => {
   await page.goto(
     'http://localhost:1234/oversized_last_headers_and_footers.html',
     { waitUntil: 'load' },

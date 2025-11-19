@@ -1,6 +1,6 @@
-import { getOverflowingRange } from './get_overflowing_range';
-import { parsePageSize } from './parse_page_size';
-import { extract } from './extract';
+import { getOverflowingRange } from './get_overflowing_range.js';
+import { parsePageSize } from './parse_page_size.js';
+import { extract } from './extract.js';
 
 function newPage({ footer, header, pageNumber }) {
   const page = document.createElement('div');

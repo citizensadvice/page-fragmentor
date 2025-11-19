@@ -3,31 +3,40 @@
   "version": "2.0.0-alpha.8",
   "description": "Split a HTML page into printable pages",
   "scripts": {
-    "test": "jest",
+    "test": "playwright test && node --test src/**/*.test.js",
     "cache:clear": "rm -rf .parcel-cache",
     "format": "prettier . --write",
     "lint:format": "prettier . --check",
     "lint:js": "eslint . --ext .js",
-    "lint": "npm run lint:format && npm run lint:js && npm run lint:css",
-    "start": "npm run cache:clear && parcel test/index.html --dist-dir local",
+    "lint": "npm run lint:format && npm run lint:js",
+    "start": "npm run cache:clear && parcel test/index.html",
     "prebuild": "rm -rf dist && rm -rf .parcel-cache",
-    "build": "npm run build:main && npm run build:auto",
-    "build:main": "parcel build src/index.js",
-    "build:auto": "parcel build src/auto.js",
+    "build": "parcel build test/index.html --no-cache",
+    "deploy": "npm run build -- --public-url \"/page-fragmenter/\" && gh-pages -d .gh-pages",
     "preversion": "npm run lint",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "postpublish": "npm run deploy",
+    "release": "npx np --any-branch"
   },
   "author": "Daniel Lewis",
   "license": "ISC",
+  "type": "module",
   "files": [
-    "dist/**/*",
     "styles/**/*",
     "src/**/*"
   ],
+  "exports": {
+    ".": "./src/index.js",
+    "./auto": "./src/auto.js"
+  },
   "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-playwright": "^2.3.0",
+    "gh-pages": "^6.3.0",
     "parcel": "^2.16.1",
     "playwright": "^1.56.1",
     "prettier": "^3.6.2"
@@ -38,8 +47,5 @@
   },
   "np": {
     "yarn": false
-  },
-  "dependencies": {
-    "eslint-plugin-playwright": "^2.3.0"
   }
 }

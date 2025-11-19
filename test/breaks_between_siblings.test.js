@@ -1,11 +1,13 @@
-it('is seven pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('is seven pages', async ({ page }) => {
   await page.goto('http://localhost:1234/breaks_between_siblings.html', {
     waitUntil: 'load',
   });
   expect(await page.$$('.page')).toHaveLength(7);
 });
 
-it('has the correct text on each page', async () => {
+test('has the correct text on each page', async ({ page }) => {
   await page.goto('http://localhost:1234/breaks_between_siblings.html', {
     waitUntil: 'load',
   });

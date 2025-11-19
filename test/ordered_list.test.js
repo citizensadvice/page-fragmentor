@@ -1,11 +1,13 @@
-it('has the expected number of pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('has the expected number of pages', async ({ page }) => {
   await page.goto('http://localhost:1234/ordered_list.html', {
     waitUntil: 'load',
   });
   expect(await page.$$('.page')).toHaveLength(5);
 });
 
-it('sets the list start', async () => {
+test('sets the list start', async ({ page }) => {
   await page.goto('http://localhost:1234/ordered_list.html', {
     waitUntil: 'load',
   });

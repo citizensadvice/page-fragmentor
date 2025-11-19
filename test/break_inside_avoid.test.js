@@ -1,11 +1,13 @@
-it('is two pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('is two pages', async ({ page }) => {
   await page.goto('http://localhost:1234/break_inside_avoid.html', {
     waitUntil: 'load',
   });
   expect(await page.$$('.page')).toHaveLength(2);
 });
 
-it('does not break within the text block', async () => {
+test('does not break within the text block', async ({ page }) => {
   await page.goto('http://localhost:1234/break_inside_avoid.html', {
     waitUntil: 'load',
   });

@@ -1,4 +1,6 @@
-it('has the expected number of pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('has the expected number of pages', async ({ page }) => {
   await page.goto('http://localhost:1234/uneven_table.html', {
     waitUntil: 'load',
   });
@@ -8,7 +10,7 @@ it('has the expected number of pages', async () => {
   ).toContain('nine-hundred-ninety-nine');
 });
 
-it('copies thead', async () => {
+test('copies thead', async ({ page }) => {
   await page.goto('http://localhost:1234/uneven_table.html', {
     waitUntil: 'load',
   });

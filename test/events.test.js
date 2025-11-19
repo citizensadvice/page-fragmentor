@@ -1,4 +1,6 @@
-it('fires create-page events', async () => {
+import { test, expect } from '@playwright/test';
+
+test('fires create-page events', async ({ page }) => {
   await page.addInitScript(() => {
     window.addEventListener('create-page', (e) => {
       window.createPageEvents = window.createPageEvents || [];
@@ -17,7 +19,7 @@ it('fires create-page events', async () => {
   ).toEqual(Array(40).fill(true));
 });
 
-it('fires before-fragmenation events', async () => {
+test('fires before-fragmenation events', async ({ page }) => {
   await page.addInitScript(() => {
     window.addEventListener('before-fragmentation', (e) => {
       window.beforeFragmentationEvents = window.beforeFragmentationEvents || [];
@@ -40,7 +42,7 @@ it('fires before-fragmenation events', async () => {
   ).toEqual(Array(39).fill(true));
 });
 
-it('fires after-fragmenation events', async () => {
+test('fires after-fragmenation events', async ({ page }) => {
   await page.addInitScript(() => {
     window.addEventListener('after-fragmentation', (e) => {
       window.afterFragmentationEvents = window.afterFragmentationEvents || [];
@@ -64,7 +66,7 @@ it('fires after-fragmenation events', async () => {
   ).toEqual(Array(39).fill(true));
 });
 
-it('fires the fragmenation-finished event', async () => {
+test('fires the fragmenation-finished event', async ({ page }) => {
   await page.addInitScript(() => {
     window.addEventListener('fragmentation-finished', (e) => {
       window.fragmenationFinishedEvents =

@@ -1,4 +1,6 @@
-it('is two pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('is two pages', async ({ page }) => {
   await page.goto(
     'http://localhost:1234/relax_rule_1_2_and_3_nested_avoids.html',
     { waitUntil: 'load' },
@@ -6,7 +8,7 @@ it('is two pages', async () => {
   expect(await page.$$('.page')).toHaveLength(2);
 });
 
-it('does not break within the dl item', async () => {
+test('does not break within the dl item', async ({ page }) => {
   await page.goto(
     'http://localhost:1234/relax_rule_1_2_and_3_nested_avoids.html',
     { waitUntil: 'load' },

@@ -1,4 +1,4 @@
-import { createPages } from './index';
+import { createPages } from './index.js';
 
 window.addEventListener('DOMContentLoaded', async () => {
   document.body.setAttribute('aria-busy', 'true');

@@ -1,4 +1,4 @@
-import { uuid } from '../uuid';
+import { uuid } from '../uuid.js';
 
 function fixTable(table) {
   // If the table already has cols, don't add new ones

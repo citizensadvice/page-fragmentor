@@ -1,4 +1,6 @@
-it('is one page', async () => {
+import { test, expect } from '@playwright/test';
+
+test('is one page', async ({ page }) => {
   await page.goto(
     'http://localhost:1234/oversized_last_headers_and_footers_with_no_breakpoints.html',
     { waitUntil: 'load' },
@@ -6,7 +8,7 @@ it('is one page', async () => {
   expect(await page.$$('.page')).toHaveLength(1);
 });
 
-it('has headers and footers', async () => {
+test('has headers and footers', async ({ page }) => {
   await page.goto(
     'http://localhost:1234/oversized_last_headers_and_footers_with_no_breakpoints.html',
     { waitUntil: 'load' },

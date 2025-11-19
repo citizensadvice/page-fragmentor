@@ -1,4 +1,4 @@
-import { uuid } from '../uuid';
+import { uuid } from '../uuid.js';
 
 function visibleListItem(node) {
   if (node.nodeType !== Node.ELEMENT_NODE) {

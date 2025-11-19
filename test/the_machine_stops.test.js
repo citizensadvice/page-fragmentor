@@ -1,4 +1,6 @@
-it('has the expected number of pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('has the expected number of pages', async ({ page }) => {
   await page.goto('http://localhost:1234/the_machine_stops.html', {
     waitUntil: 'load',
   });
@@ -10,7 +12,7 @@ it('has the expected number of pages', async () => {
   expect(lastPageText).toContain('Copyright ©1947 E.M. Forster');
 });
 
-it('sets the total pages', async () => {
+test('sets the total pages', async ({ page }) => {
   await page.goto('http://localhost:1234/the_machine_stops.html', {
     waitUntil: 'load',
   });
@@ -21,7 +23,7 @@ it('sets the total pages', async () => {
   ).toEqual('40');
 });
 
-it('sets the page numbers', async () => {
+test('sets the page numbers', async ({ page }) => {
   await page.goto('http://localhost:1234/the_machine_stops.html', {
     waitUntil: 'load',
   });

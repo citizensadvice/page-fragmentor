@@ -1,5 +1,5 @@
-import { breakPointGenerator } from './generators/break_point_generator';
-import { ruleDisablerGenerator } from './generators/rule_disabler_generator';
+import { breakPointGenerator } from './generators/break_point_generator.js';
+import { ruleDisablerGenerator } from './generators/rule_disabler_generator.js';
 
 /**
  * Returns the range overflowing an element

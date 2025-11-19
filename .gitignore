@@ -1,3 +1,11 @@
 node_modules
-local
+dist
 .parcel-cache
+.gh-pages
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

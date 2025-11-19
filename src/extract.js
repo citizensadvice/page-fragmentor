@@ -1,6 +1,6 @@
-import { TableExtractor } from './extractors/table_extractor';
-import { ListExtractor } from './extractors/list_extractor';
-import { FragmentedExtractor } from './extractors/fragmented_extractor';
+import { TableExtractor } from './extractors/table_extractor.js';
+import { ListExtractor } from './extractors/list_extractor.js';
+import { FragmentedExtractor } from './extractors/fragmented_extractor.js';
 
 /**
  * Extract a range

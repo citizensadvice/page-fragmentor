@@ -1,5 +1,5 @@
-import { BaseBreakPoint } from './base_break_point';
-import { getMargin } from '../get_margin';
+import { BaseBreakPoint } from './base_break_point.js';
+import { getMargin } from '../get_margin.js';
 
 /**
  * Represents a class A breakpoint

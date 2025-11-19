@@ -1,11 +1,13 @@
-it('is three pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('is three pages', async ({ page }) => {
   await page.goto('http://localhost:1234/break_block_margin_no_collapse.html', {
     waitUntil: 'load',
   });
   expect(await page.$$('.page')).toHaveLength(3);
 });
 
-it('the page breaks in the expected places', async () => {
+test('the page breaks in the expected places', async ({ page }) => {
   await page.goto('http://localhost:1234/break_block_margin_no_collapse.html', {
     waitUntil: 'load',
   });

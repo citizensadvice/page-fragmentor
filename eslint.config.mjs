@@ -9,7 +9,7 @@ export default [
     files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
   },
   {
-    ignores: ['node_modules', 'dist', 'coverage', '.gh-pages', 'local'],
+    ignores: ['node_modules', 'dist', 'test-results', '.gh-pages'],
   },
   js.configs.recommended,
   importPlugin.flatConfigs.recommended,
@@ -24,6 +24,7 @@ export default [
     },
     rules: {
       'class-methods-use-this': 'off',
+      'import/extensions': ['error', 'always'],
       'import/no-default-export': 'error',
       'import/prefer-default-export': 'off',
       'no-continue': 'off',
@@ -36,11 +37,11 @@ export default [
   },
   {
     ...playwright.configs['flat/recommended'],
-    files: ['tests/**'],
+    files: ['test/**'],
     rules: {
       ...playwright.configs['flat/recommended'].rules,
-      // Customize Playwright rules
-      // ...
+      'playwright/no-eval': 'off',
+      'playwright/no-element-handle': 'off',
     },
   },
   {
@@ -52,8 +53,12 @@ export default [
     },
   },
   {
-    files: ['eslint.config.mjs'],
-
+    files: ['eslint.config.mjs', 'playwright.config.js'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
     rules: {
       'import/no-default-export': 'off',
     },

@@ -1,4 +1,6 @@
-it('creates all pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('creates all pages', async ({ page }) => {
   await page.goto('http://localhost:1234/long_paragraph.html', {
     waitUntil: 'load',
   });

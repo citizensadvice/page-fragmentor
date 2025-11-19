@@ -1,6 +1,6 @@
-import { BaseBreakPoint } from './base_break_point';
-import { lineBoxGenerator } from '../generators/line_box_generator';
-import { getMargin } from '../get_margin';
+import { BaseBreakPoint } from './base_break_point.js';
+import { lineBoxGenerator } from '../generators/line_box_generator.js';
+import { getMargin } from '../get_margin.js';
 
 /**
  * Represents a class B breakpoint

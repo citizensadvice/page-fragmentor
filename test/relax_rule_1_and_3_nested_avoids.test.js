@@ -1,4 +1,6 @@
-it('is three pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('is three pages', async ({ page }) => {
   await page.goto(
     'http://localhost:1234/relax_rule_1_and_3_nested_avoids.html',
     { waitUntil: 'load' },
@@ -6,7 +8,7 @@ it('is three pages', async () => {
   expect(await page.$$('.page')).toHaveLength(3);
 });
 
-it('does not break before the headings', async () => {
+test('does not break before the headings', async ({ page }) => {
   await page.goto(
     'http://localhost:1234/relax_rule_1_and_3_nested_avoids.html',
     { waitUntil: 'load' },

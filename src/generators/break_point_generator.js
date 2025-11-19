@@ -1,9 +1,9 @@
-import { nodeGenerator } from './node_generator';
-import { RectFilter } from '../caches/rect_filter_cache';
-import { BaseBreakPoint } from '../break_points/base_break_point';
-import { InlineBreakPoint } from '../break_points/inline_break_point';
-import { SiblingBreakPoint } from '../break_points/sibling_break_point';
-import { NodeRules } from '../caches/node_rule_cache';
+import { nodeGenerator } from './node_generator.js';
+import { RectFilter } from '../caches/rect_filter_cache.js';
+import { BaseBreakPoint } from '../break_points/base_break_point.js';
+import { InlineBreakPoint } from '../break_points/inline_break_point.js';
+import { SiblingBreakPoint } from '../break_points/sibling_break_point.js';
+import { NodeRules } from '../caches/node_rule_cache.js';
 
 /**
  * Yields permissible break points

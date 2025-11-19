@@ -1,4 +1,6 @@
-it('generates headers', async () => {
+import { test, expect } from '@playwright/test';
+
+test('generates headers', async ({ page }) => {
   await page.goto('http://localhost:1234/headers.html', { waitUntil: 'load' });
 
   // Safari handles white space differently

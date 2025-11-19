@@ -1,11 +1,13 @@
-it('is four pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('is four pages', async ({ page }) => {
   await page.goto('http://localhost:1234/text_with_inline.html', {
     waitUntil: 'load',
   });
   expect(await page.$$('.page')).toHaveLength(4);
 });
 
-it('breaks the second page with the text', async () => {
+test('breaks the second page with the text', async ({ page }) => {
   await page.goto('http://localhost:1234/text_with_inline.html', {
     waitUntil: 'load',
   });
@@ -14,7 +16,7 @@ it('breaks the second page with the text', async () => {
   ).toContain('malesuada tellus ultricies');
 });
 
-it('breaks the fourth page before the span', async () => {
+test('breaks the fourth page before the span', async ({ page }) => {
   await page.goto('http://localhost:1234/text_with_inline.html', {
     waitUntil: 'load',
   });

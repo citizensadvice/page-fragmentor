@@ -1,11 +1,13 @@
-it('is two pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('is two pages', async ({ page }) => {
   await page.goto('http://localhost:1234/break_block_parent_margin.html', {
     waitUntil: 'load',
   });
   expect(await page.$$('.page')).toHaveLength(2);
 });
 
-it('second page breaks in the expected place', async () => {
+test('second page breaks in the expected place', async ({ page }) => {
   await page.goto('http://localhost:1234/break_block_parent_margin.html', {
     waitUntil: 'load',
   });

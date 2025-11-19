@@ -1,11 +1,13 @@
-it('is four pages', async () => {
+import { test, expect } from '@playwright/test';
+
+test('is four pages', async ({ page }) => {
   await page.goto('http://localhost:1234/inline_break_inside_avoid.html', {
     waitUntil: 'load',
   });
   expect(await page.$$('.page')).toHaveLength(2);
 });
 
-it('breaks within the inline block', async () => {
+test('breaks within the inline block', async ({ page }) => {
   await page.goto('http://localhost:1234/inline_break_inside_avoid.html', {
     waitUntil: 'load',
   });

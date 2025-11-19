@@ -1,4 +1,6 @@
-it('is one page with no content', async () => {
+import { test, expect } from '@playwright/test';
+
+test('is one page with no content', async ({ page }) => {
   await page.goto('http://localhost:1234/no_content.html', {
     waitUntil: 'load',
   });
