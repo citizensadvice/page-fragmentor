@@ -1,4 +1,3 @@
-import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import globals from 'globals';
 import importPlugin from 'eslint-plugin-import';
@@ -10,11 +9,10 @@ export default [
     files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
   },
   {
-    ignores: ['node_modules', 'dist', 'coverage', '.gh-pages'],
+    ignores: ['node_modules', 'dist', 'coverage', '.gh-pages', 'local'],
   },
   js.configs.recommended,
   importPlugin.flatConfigs.recommended,
-  comments.recommended,
   eslintConfigPrettier,
   {
     languageOptions: {
@@ -51,6 +49,13 @@ export default [
     rules: {
       'import/no-extraneous-dependencies': 'off',
       'react/prop-types': 'off',
+    },
+  },
+  {
+    files: ['eslint.config.mjs'],
+
+    rules: {
+      'import/no-default-export': 'off',
     },
   },
 ];

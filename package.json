@@ -4,18 +4,18 @@
   "description": "Split a HTML page into printable pages",
   "scripts": {
     "test": "jest",
+    "cache:clear": "rm -rf .parcel-cache",
     "format": "prettier . --write",
     "lint:format": "prettier . --check",
     "lint:js": "eslint . --ext .js",
     "lint": "npm run lint:format && npm run lint:js && npm run lint:css",
-    "start": "parcel test/index.html --dist-dir local",
+    "start": "npm run cache:clear && parcel test/index.html --dist-dir local",
     "prebuild": "rm -rf dist && rm -rf .parcel-cache",
     "build": "npm run build:main && npm run build:auto",
     "build:main": "parcel build src/index.js",
     "build:auto": "parcel build src/auto.js",
     "preversion": "npm run lint",
-    "prepublishOnly": "npm run build",
-    "release": "np"
+    "prepublishOnly": "npm run build"
   },
   "author": "Daniel Lewis",
   "license": "ISC",
@@ -26,6 +26,7 @@
   ],
   "devDependencies": {
     "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "parcel": "^2.16.1",
     "playwright": "^1.56.1",
