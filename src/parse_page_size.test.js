@@ -31,6 +31,10 @@ suite('named sizes', () => {
     assert.deepEqual(parsePageSize('A4'), ['210mm', '297mm']);
   });
 
+  test('parses "a4" to A4 portrait', () => {
+    assert.deepEqual(parsePageSize('a4'), ['210mm', '297mm']);
+  });
+
   test('parses "A4 portrait" to A4 portrait', () => {
     assert.deepEqual(parsePageSize('A4 portrait'), ['210mm', '297mm']);
   });
@@ -45,6 +49,10 @@ suite('named sizes', () => {
 
   test('parses "A4 landscape" to A4 landscape', () => {
     assert.deepEqual(parsePageSize('A4 landscape'), ['297mm', '210mm']);
+  });
+
+  test('parses "a4 LANDscape" to A4 landscape', () => {
+    assert.deepEqual(parsePageSize('a4 LANDscape'), ['297mm', '210mm']);
   });
 
   test('parses "A5" to A5 portrait', () => {
