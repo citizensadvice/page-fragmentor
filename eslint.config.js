@@ -53,7 +53,7 @@ export default [
     },
   },
   {
-    files: ['eslint.config.mjs', 'playwright.config.js'],
+    files: ['eslint.config.js', 'playwright.config.js', 'stylelint.config.js'],
     languageOptions: {
       globals: {
         ...globals.node,

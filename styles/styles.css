@@ -3,11 +3,13 @@ html {
   margin: 0;
   padding: 0;
   overflow-wrap: break-word;
+
   /* defaults */
-  --page-size: A4 portrait;
+  --page-size: a4 portrait;
   --page-margin: 1in;
   --orphans: 2;
   --widows: 2;
+
   /* `--page-width` and `--page-height` will be set by the JS from `--page-size` */
 }
 
@@ -15,20 +17,26 @@ body {
   background-color: #ddd;
   margin: 0;
   padding: 0;
+
   /* page should take size of inner */
   display: flex;
   flex-direction: column;
+
   /* Will be updated by JS */
   --page-count: 0;
 }
 
-/* Display friendly generating message */
+* {
+  /* Force specified font size on iOS */
+  text-size-adjust: none;
+}
 
 body[aria-busy='true'] * {
   opacity: 0 !important;
 }
 
-body[aria-busy='true']:after {
+body[aria-busy='true']::after {
+  /* Display friendly generating message */
   content: 'Generating…';
   position: fixed;
   top: calc(50vh - 2em);
@@ -36,11 +44,6 @@ body[aria-busy='true']:after {
   right: 0;
   font-size: 2em;
   text-align: center;
-}
-
-* {
-  /* Force specified font size on iOS */
-  -webkit-text-size-adjust: none;
 }
 
 /* Wrapper for each page */
@@ -52,11 +55,12 @@ body[aria-busy='true']:after {
 
 /* Sets the dimension of the page. Print margins are the padding */
 .page-inner {
-  /* The JS sets `--page-width` and `--page-height` by reading `--page-size`*/
+  /* The JS sets `--page-width` and `--page-height` by reading `--page-size` */
   width: var(--page-width);
   height: var(--page-height);
   box-sizing: border-box;
   padding: var(--page-margin);
+
   /* Layout header, content and footer */
   display: flex;
   flex-direction: column;
@@ -66,21 +70,26 @@ body[aria-busy='true']:after {
 
 /* The wrapper for a header */
 .page-header {
+  /* add your styles */
 }
 
 /* The wrapper for the main content */
 .page-content {
   overflow: hidden;
+
   /* Fill space not taken by the header and footer */
   flex-grow: 1;
 }
 
 /* The wrapper for a footer */
 .page-footer {
+  /* add your styles */
 }
 
 /* Inserts a page count */
+
 /* The JS will set `--page-count` on the body and `--page-number` on the pages */
+
 /* https://chenhuijing.com/blog/the-wondrous-world-of-css-counters */
 .page-count::after {
   /* You must reset the counters. Safari does not support counter-set */
@@ -112,12 +121,15 @@ h6 {
 @page {
   /* Default size */
   size: var(--page-size);
+
   /* Margins are set on .page-content  */
   margin: 0;
 }
 
 /* Warning: Safari does not support @page { margin }.  The pages will print with larger margins */
+
 /* Warning: Firefox does not support @page :first */
+
 /* Warning: Browsers might not set the actual print size in the printer dialog */
 
 @media print {
@@ -134,17 +146,22 @@ h6 {
   }
 
   /* This sets each `.page` to be entirely contained on one printed page and to not overflow */
+
   /* As long as the dimensions match the printer settings everything should come out the expected size */
   .page {
     /* Remove on screen presentation */
     box-shadow: none;
     margin: 0 !important;
+
     /* Force each page on a separate page */
     break-after: page !important;
+
     /* Prevent pages overflowing onto two pages. */
+
     /* Some browsers may draw a page marginally too large, but as long as it doesn't overflow onto a second printed page this doesn't matter */
     height: 1px;
     display: block;
+
     /* Ensure the page content is printed */
     overflow: visible;
   }

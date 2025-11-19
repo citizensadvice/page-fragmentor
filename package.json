@@ -7,8 +7,9 @@
     "cache:clear": "rm -rf .parcel-cache",
     "format": "prettier . --write",
     "lint:format": "prettier . --check",
-    "lint:js": "eslint . --ext .js",
-    "lint": "npm run lint:format && npm run lint:js",
+    "lint:js": "eslint",
+    "lint:css": "stylelint **/*.css",
+    "lint": "npm run lint:format && npm run lint:js && npm run lint:css",
     "start": "npm run cache:clear && parcel test/index.html",
     "prebuild": "rm -rf dist && rm -rf .parcel-cache",
     "build": "parcel build test/index.html --no-cache",
@@ -27,7 +28,8 @@
   ],
   "exports": {
     ".": "./src/index.js",
-    "./auto": "./src/auto.js"
+    "./auto": "./src/auto.js",
+    "./styles.css": "./styles/styles.css"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",
@@ -39,7 +41,9 @@
     "gh-pages": "^6.3.0",
     "parcel": "^2.16.1",
     "playwright": "^1.56.1",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard": "^39.0.1"
   },
   "prettier": {
     "singleAttributePerLine": true,
