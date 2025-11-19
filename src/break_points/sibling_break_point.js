@@ -12,18 +12,31 @@ export class SiblingBreakPoint extends BaseBreakPoint {
   }
 
   get force() {
-    return (this._force ??= this.leadingNodes.some((node) => this.nodeRules.get(node).breakBefore === 'page')
-      || this.trailingNodes.some((node) => this.nodeRules.get(node).breakAfter === 'page'));
+    return (this._force ??=
+      this.leadingNodes.some(
+        (node) => this.nodeRules.get(node).breakBefore === 'page',
+      ) ||
+      this.trailingNodes.some(
+        (node) => this.nodeRules.get(node).breakAfter === 'page',
+      ));
   }
 
   get overflowing() {
-    return this.leadingNodes.some(this.hasLeadingOverflow, this)
-      || this.trailingNodes.some(this.hasTrailingOverflow, this);
+    return (
+      this.leadingNodes.some(this.hasLeadingOverflow, this) ||
+      this.trailingNodes.some(this.hasTrailingOverflow, this)
+    );
   }
 
   get avoid() {
-    return this.leadingNodes.some((node) => ['avoid', 'avoid-page'].includes(this.nodeRules.get(node).breakBefore))
-      || this.trailingNodes.some((node) => ['avoid', 'avoid-page'].includes(this.nodeRules.get(node).breakAfter));
+    return (
+      this.leadingNodes.some((node) =>
+        ['avoid', 'avoid-page'].includes(this.nodeRules.get(node).breakBefore),
+      ) ||
+      this.trailingNodes.some((node) =>
+        ['avoid', 'avoid-page'].includes(this.nodeRules.get(node).breakAfter),
+      )
+    );
   }
 
   get bottom() {
@@ -45,7 +58,10 @@ export class SiblingBreakPoint extends BaseBreakPoint {
       return null;
     }
 
-    if (!force && this.nodeRules.get(node).breakInsideParentAvoid > avoidDepth) {
+    if (
+      !force &&
+      this.nodeRules.get(node).breakInsideParentAvoid > avoidDepth
+    ) {
       return null;
     }
     if (!force && !disableRules.includes(1) && avoid) {
@@ -72,9 +88,7 @@ export class SiblingBreakPoint extends BaseBreakPoint {
 
   getBottom(node) {
     const rect = this.rectFilter.get(node);
-    return Math.ceil(
-      rect.bottom + getMargin(node, this.root),
-    );
+    return Math.ceil(rect.bottom + getMargin(node, this.root));
   }
 
   hasTrailingOverflow(node) {

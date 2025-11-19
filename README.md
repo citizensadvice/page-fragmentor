@@ -11,7 +11,7 @@ slightly differently. This means the page breaks cannot be guaranteed to be in t
 place in each browser. Hyphenation, bold, italic, font-sizes, font-family and sub and sup text
 may result in subtle differences.
 
-This is inspired by [paged.js][4].  That library is a full polyfill for [CSS paged media][5].
+This is inspired by [paged.js][4]. That library is a full polyfill for [CSS paged media][5].
 This library is a simpler sub-set of features, but allowing greater customisation of headers and footers.
 
 ## Instructions
@@ -20,7 +20,7 @@ Include the provided ['auto'](src/auto.js) script and the provided [css](styles/
 
 The page will be fragmented into printable pages.
 
-Configuration is done via CSS.  You can either following the guidance below, or read the [CSS](styles/styles.css) and
+Configuration is done via CSS. You can either following the guidance below, or read the [CSS](styles/styles.css) and
 go your own path.
 
 If you want to process the page prior to fragmenting it, then see [`src/auto.js`](src/auto.js);
@@ -30,7 +30,7 @@ If you want to process the page prior to fragmenting it, then see [`src/auto.js`
 The fragmentation will create a page structure that looks like the following.
 
 If there is a `<main>` element, the content will be taken from that element and all other content on the page removed.
-Otherwise, all content on the page will used.  `<header>` and `<footer>` elements are removed to create headers and footers
+Otherwise, all content on the page will used. `<header>` and `<footer>` elements are removed to create headers and footers
 (see below).
 
 You may use CSS to modify the appearance of particular page, but avoid using `:last-child` or `nth-last-child` selectors on `.page`
@@ -38,7 +38,7 @@ as the fragmentation is calculated one page at a time, and the current page in t
 
 Avoid modifying `.page` or `.page-inner` without reading the notes in the CSS as you may break everything.
 
-`data-last-page="true"` is added to the final page.  If adding this caused overflow, an additional page will be added.
+`data-last-page="true"` is added to the final page. If adding this caused overflow, an additional page will be added.
 
 ```html
 <body data-page-count="3" style="--page-count:3;">
@@ -68,7 +68,7 @@ Avoid modifying `.page` or `.page-inner` without reading the notes in the CSS as
 
 ### Page size
 
-Set `--page-size` on the body to set the page size.  The values should be valid values for the [`@page size`][9] property.
+Set `--page-size` on the body to set the page size. The values should be valid values for the [`@page size`][9] property.
 
 This will be the same for all pages.
 
@@ -80,11 +80,11 @@ body {
 
 ### Page margins
 
-Set `--page-margin` to set the margins.  The values should a valid margin size.
+Set `--page-margin` to set the margins. The values should a valid margin size.
 
 If you want to set the margins for a specific page then set the variable on a `.page`.
 
-Note that Safari does not support `@page { margin }`.  So the margins will be larger when printing from Safari.
+Note that Safari does not support `@page { margin }`. So the margins will be larger when printing from Safari.
 
 ```css
 /* All pages */
@@ -108,7 +108,7 @@ body {
 You may set a header and footer by including a `<header>` and/or `<footer>` element that are direct children of `<body>`.
 These will be cloned onto each page.
 
-If you want to vary the headers and footers on each page, use CSS to show and hide content.  For example
+If you want to vary the headers and footers on each page, use CSS to show and hide content. For example
 `.page::not(nth-child(even)) .page-header .even-content { display: none}` will hide content on even pages.
 
 The selector `.page[data-last-page="true"]` will select content on the last page.
@@ -151,12 +151,12 @@ Setting orphans and widows to '0' will turn off breaking between line boxes. Thi
 
 `<thead>` will be cloned if a page is broken across a table.
 
-`<col>` elements will also be added to fix the width of the table.  This prevents overflow if fragmentation
+`<col>` elements will also be added to fix the width of the table. This prevents overflow if fragmentation
 causes the browser to resize the table cells.
 
 The CSS contains some base settings for tables.
 
-By default a `<tr>` has `break-inside: avoid`.  Without this breaks may happen within a table cell, which may
+By default a `<tr>` has `break-inside: avoid`. Without this breaks may happen within a table cell, which may
 lead to cells changing columns.
 
 Oversized table cells, `<thead>`s or `<caption>`s may lead to unpredictable results.
@@ -176,15 +176,15 @@ Use this to modify, for example borders or padding.
 
 ### Events
 
-Some events are provided if you wish to customise the fragmentation.  These events bubble.
+Some events are provided if you wish to customise the fragmentation. These events bubble.
 
 - `create-page` - dispatched when a page is created, but before any fragmentation occurs
 - `before-fragmentation` - dispatched before fragmentation.
-   The `details` property contains the `Range` that will be moved into a new page
+  The `details` property contains the `Range` that will be moved into a new page
 - `after-fragmentation` - dispatched after the range is extracted.
-   The `details` property contains the extracted `DocumentFragment` that will be inserted into the next page
+  The `details` property contains the extracted `DocumentFragment` that will be inserted into the next page
 - `fragmentation-finished` - dispatched after the fragmentation process is completed.
-   Dispatched on `document.body`.
+  Dispatched on `document.body`.
 
 ## Fragmentation algorithm
 
@@ -204,8 +204,8 @@ The fragmentation algorithm is loosely based on the [CSS fragmentation module 3]
 - `box-decoration-break` is not supported. Elements are cloned when fragmented and all margins, borders and paddings are cloned
 - margins, borders and padding are not [collapsed to prevent overflow][8]
 - monolithic elements are not split to prevent overflow
-- if no valid break-point is found the content will overflow off the page.  By default this content is hidden
-- There is no support for automated hyphenation.  If you enable `hypens` they will not be added across page breaks
+- if no valid break-point is found the content will overflow off the page. By default this content is hidden
+- There is no support for automated hyphenation. If you enable `hypens` they will not be added across page breaks
 - CSS inserted content cannot be fragmented
 - it will have bugs.
 
@@ -226,7 +226,7 @@ npm build
 ```
 
 [1]: https://thecodingmachine.github.io/gotenberg/
-[2]: https://github.com/puppeteer/puppeteer 
+[2]: https://github.com/puppeteer/puppeteer
 [3]: https://github.com/microsoft/playwright
 [4]: https://www.pagedjs.org/
 [5]: https://www.w3.org/TR/css-page-3/

@@ -23,8 +23,12 @@ export class InlineBreakPoint extends BaseBreakPoint {
       return null;
     }
 
-    if (!(disableRules.includes(4) && this.containerRules.breakInsideAvoid <= avoidDepth)
-      && this.containerRules.breakInsideAvoid
+    if (
+      !(
+        disableRules.includes(4) &&
+        this.containerRules.breakInsideAvoid <= avoidDepth
+      ) &&
+      this.containerRules.breakInsideAvoid
     ) {
       return null;
     }
@@ -35,7 +39,12 @@ export class InlineBreakPoint extends BaseBreakPoint {
     let overflowing = lineBoxRange || overflowingNodeRange;
 
     if (lineBoxRange && overflowingNodeRange) {
-      if (lineBoxRange.compareBoundaryPoints(Range.START_TO_START, overflowingNodeRange) === 1) {
+      if (
+        lineBoxRange.compareBoundaryPoints(
+          Range.START_TO_START,
+          overflowingNodeRange,
+        ) === 1
+      ) {
         overflowing = lineBoxRange;
       } else {
         overflowing = overflowingNodeRange;
@@ -74,7 +83,7 @@ export class InlineBreakPoint extends BaseBreakPoint {
     for (const lineBox of lineBoxGenerator(this.nodes)) {
       if (!overflow) {
         const rect = lineBox.getBoundingClientRect();
-        if (rect.bottom > (this.rootRect.bottom - this.bottomSpace)) {
+        if (rect.bottom > this.rootRect.bottom - this.bottomSpace) {
           overflow = lineBox;
           overflowIndex = lineBoxes.length;
         }
@@ -106,10 +115,14 @@ export class InlineBreakPoint extends BaseBreakPoint {
   findFirstOverflowingNodeRange() {
     const foundNode = this.nodes.find((node) => {
       const rect = this.rectFilter.get(node);
-      return rect.bottom > (this.rootRect.bottom - getMargin(node, this.root));
+      return rect.bottom > this.rootRect.bottom - getMargin(node, this.root);
     });
 
-    if (!foundNode || foundNode.nodeType === Node.TEXT_NODE || foundNode === this.firstNode) {
+    if (
+      !foundNode ||
+      foundNode.nodeType === Node.TEXT_NODE ||
+      foundNode === this.firstNode
+    ) {
       return null;
     }
     const range = new Range();

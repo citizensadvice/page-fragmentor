@@ -10,7 +10,9 @@ export function* lineBoxGenerator(nodes) {
   const selection = window.getSelection();
 
   const firstText = nodes.find((node) => node.nodeType === Node.TEXT_NODE);
-  const lastText = [...nodes].reverse().find((node) => node.nodeType === Node.TEXT_NODE);
+  const lastText = [...nodes]
+    .reverse()
+    .find((node) => node.nodeType === Node.TEXT_NODE);
 
   if (!firstText) {
     return;
@@ -41,12 +43,16 @@ export function* lineBoxGenerator(nodes) {
 
     // Chrome gets stuck at full width inline blocks
     // So jump end to the start of the next text node
-    if (lineRange.endOffset === 0 && lineRange.endContainer.nodeType === Node.ELEMENT_NODE) {
-      const node = nodes.find((item) => (
-        item.nodeType === Node.TEXT_NODE
-          && item !== lineRange.endContainer
-          && lineRange.comparePoint(item, 0) === 1
-      ));
+    if (
+      lineRange.endOffset === 0 &&
+      lineRange.endContainer.nodeType === Node.ELEMENT_NODE
+    ) {
+      const node = nodes.find(
+        (item) =>
+          item.nodeType === Node.TEXT_NODE &&
+          item !== lineRange.endContainer &&
+          lineRange.comparePoint(item, 0) === 1,
+      );
       if (node) {
         lineRange.setEndBefore(node);
       }
@@ -57,7 +63,10 @@ export function* lineBoxGenerator(nodes) {
     }
 
     // Stuck protection
-    if (lastRange && lineRange.compareBoundaryPoints(Range.START_TO_START, lastRange) === 0) {
+    if (
+      lastRange &&
+      lineRange.compareBoundaryPoints(Range.START_TO_START, lastRange) === 0
+    ) {
       break;
     }
 

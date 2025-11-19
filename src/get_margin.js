@@ -3,18 +3,20 @@ function getMeasurement(style, prop) {
 }
 
 function collapseMargins(style) {
-  return !getMeasurement(style, 'padding-bottom')
-    && !getMeasurement(style, 'border-bottom-width')
-    && !style.display.includes('inline')
-    && style.overflow === 'visible'
-    && style.float === 'none';
+  return (
+    !getMeasurement(style, 'padding-bottom') &&
+    !getMeasurement(style, 'border-bottom-width') &&
+    !style.display.includes('inline') &&
+    style.overflow === 'visible' &&
+    style.float === 'none'
+  );
 }
 
 function collapsedMargins(margins) {
   return Math.max(
     0,
-    Math.max(0, ...margins.filter((v) => v >= 0))
-    + Math.min(0, ...margins.filter((v) => v < 0)),
+    Math.max(0, ...margins.filter((v) => v >= 0)) +
+      Math.min(0, ...margins.filter((v) => v < 0)),
   );
 }
 
@@ -24,9 +26,10 @@ function collapsedMargins(margins) {
 export function getMargin(node, root, includeInner) {
   let bottom = 0;
   let cursor = node.parentNode;
-  let style = node.nodeType === Node.ELEMENT_NODE
-    ? window.getComputedStyle(node)
-    : { getPropertyValue: () => 0 };
+  let style =
+    node.nodeType === Node.ELEMENT_NODE
+      ? window.getComputedStyle(node)
+      : { getPropertyValue: () => 0 };
   let margins = [getMeasurement(style, 'margin-bottom')];
 
   if (includeInner) {

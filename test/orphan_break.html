@@ -1,36 +1,40 @@
 <!doctype html>
 <html lang="en-GB">
-<head>
-  <meta charset="utf-8">
-  <title>Orphan break</title>
-  <link href="../styles/styles.css" rel="stylesheet">
-  <script src="../src/auto.js"></script>
-  <style>
-    html {
-      --page-size: A5;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <title>Orphan break</title>
+    <link
+      href="../styles/styles.css"
+      rel="stylesheet"
+    />
+    <script src="../src/auto.js"></script>
+    <style>
+      html {
+        --page-size: A5;
+      }
 
-    .bordered {
-      border: 1px solid red;
-    }
+      .bordered {
+        border: 1px solid red;
+      }
 
-    .no-break {
-      break-inside: avoid;
-      height: 1000px;
-      border: 1px solid blue;
-    }
+      .no-break {
+        break-inside: avoid;
+        height: 1000px;
+        border: 1px solid blue;
+      }
 
-    .page-content {
-      box-shadow:  inset 0 0 0 1px green;
-    }
-  </style>
-<body>
-<main>
-  <div class="bordered">
-    No break within this div
-  </div>
-  <div class="no-break">
-    Break within this<br>
-    Even if it looks a bit silly
-  </div>
-</main>
+      .page-content {
+        box-shadow: inset 0 0 0 1px green;
+      }
+    </style>
+    <body>
+      <main>
+        <div class="bordered">No break within this div</div>
+        <div class="no-break">
+          Break within this<br />
+          Even if it looks a bit silly
+        </div>
+      </main>
+    </body>
+  </head>
+</html>

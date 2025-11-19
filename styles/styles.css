@@ -18,20 +18,20 @@ body {
   /* page should take size of inner */
   display: flex;
   flex-direction: column;
-   /* Will be updated by JS */
+  /* Will be updated by JS */
   --page-count: 0;
 }
 
 /* Display friendly generating message */
 
-body[aria-busy=true] * {
+body[aria-busy='true'] * {
   opacity: 0 !important;
 }
 
-body[aria-busy=true]:after {
-  content: "Generating…";
+body[aria-busy='true']:after {
+  content: 'Generating…';
   position: fixed;
-  top: calc(50vh - 2em);;
+  top: calc(50vh - 2em);
   left: 0;
   right: 0;
   font-size: 2em;
@@ -46,7 +46,7 @@ body[aria-busy=true]:after {
 /* Wrapper for each page */
 .page {
   background-color: white;
-  box-shadow:  inset 0 0 0 1px black;
+  box-shadow: inset 0 0 0 1px black;
   margin: 3em auto;
 }
 
@@ -85,7 +85,7 @@ body[aria-busy=true]:after {
 .page-count::after {
   /* You must reset the counters. Safari does not support counter-set */
   counter-reset: pagecount var(--page-count) pagenumber var(--page-number);
-  content: counter(pagenumber) " of " counter(pagecount);
+  content: counter(pagenumber) ' of ' counter(pagecount);
 }
 
 /* Sensible defaults for tables */

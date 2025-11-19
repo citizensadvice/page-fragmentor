@@ -9,7 +9,11 @@ import { FragmentedExtractor } from './extractors/fragmented_extractor';
  *   - Switch the table to a fixed layout
  */
 export function extract(range) {
-  const extractors = [new TableExtractor(), new ListExtractor(), new FragmentedExtractor()];
+  const extractors = [
+    new TableExtractor(),
+    new ListExtractor(),
+    new FragmentedExtractor(),
+  ];
   extractors.forEach((extractor) => extractor.before(range));
   const contents = range.extractContents();
   extractors.forEach((extractor) => extractor.after(contents));

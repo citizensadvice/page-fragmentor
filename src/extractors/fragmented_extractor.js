@@ -1,7 +1,10 @@
 export class FragmentedExtractor {
   before(range) {
     const { startContainer } = range;
-    if (startContainer.nodeType === Node.ELEMENT_NODE && startContainer.matches('.page-content')) {
+    if (
+      startContainer.nodeType === Node.ELEMENT_NODE &&
+      startContainer.matches('.page-content')
+    ) {
       // Range is not inside an element
       return;
     }
@@ -16,9 +19,11 @@ export class FragmentedExtractor {
   }
 
   after(fragment) {
-    fragment.querySelectorAll('[data-fragmented-start=true]').forEach((node) => {
-      delete node.dataset.fragmentedStart;
-      node.dataset.fragmentedEnd = 'true';
-    });
+    fragment
+      .querySelectorAll('[data-fragmented-start=true]')
+      .forEach((node) => {
+        delete node.dataset.fragmentedStart;
+        node.dataset.fragmentedEnd = 'true';
+      });
   }
 }

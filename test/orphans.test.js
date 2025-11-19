@@ -11,5 +11,7 @@ it('breaks the second paragraph onto a new page', async () => {
 
 it('breaks the 4th paragraph with 5 orphans', async () => {
   await page.goto('http://localhost:1234/orphans.html', { waitUntil: 'load' });
-  expect(await page.$eval('.page:nth-child(4) p', (node) => node.innerText)).toMatch(/^ultricies nisl risus nec tellus./);
+  expect(
+    await page.$eval('.page:nth-child(4) p', (node) => node.innerText),
+  ).toMatch(/^ultricies nisl risus nec tellus./);
 });

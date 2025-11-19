@@ -8,13 +8,19 @@ function* iterateLevel(walker, inline = false) {
     }
 
     // Inline can only be broken across text nodes
-    const isInline = inline || window.getComputedStyle(currentNode).display.includes('inline');
+    const isInline =
+      inline || window.getComputedStyle(currentNode).display.includes('inline');
 
     yield [isInline ? 'inline' : 'enter', currentNode];
 
     if (window.getComputedStyle(currentNode).display === 'table-row') {
       // do nothing - breaking within a table row is not supported
-    } else if (!currentNode.matches('picture,video,canvas,object,audio,embed,iframe,svg,math') && walker.firstChild()) {
+    } else if (
+      !currentNode.matches(
+        'picture,video,canvas,object,audio,embed,iframe,svg,math',
+      ) &&
+      walker.firstChild()
+    ) {
       yield* iterateLevel(walker, isInline);
       walker.parentNode();
     }

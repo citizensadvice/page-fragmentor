@@ -58,11 +58,12 @@ function extractSelector(selector) {
 }
 
 function emptyFragment(node) {
-  return !node.hasChildNodes()
-    || (node.childNodes.length === 1
-      && node.firstChild.nodeType === Node.TEXT_NODE
-      && !node.firstChild.data.trim()
-    );
+  return (
+    !node.hasChildNodes() ||
+    (node.childNodes.length === 1 &&
+      node.firstChild.nodeType === Node.TEXT_NODE &&
+      !node.firstChild.data.trim())
+  );
 }
 
 function emptyRange(range) {
@@ -76,7 +77,9 @@ function emptyRange(range) {
  * Move the content into pages
  */
 export function createPages() {
-  const size = parsePageSize(window.getComputedStyle(document.body).getPropertyValue('--page-size'));
+  const size = parsePageSize(
+    window.getComputedStyle(document.body).getPropertyValue('--page-size'),
+  );
   document.documentElement.style.setProperty('--page-width', size[0]);
   document.documentElement.style.setProperty('--page-height', size[1]);
 
@@ -121,9 +124,19 @@ export function createPages() {
     }
 
     if (range) {
-      outerPage.dispatchEvent(new CustomEvent('before-fragmentation', { detail: range, bubbles: true }));
+      outerPage.dispatchEvent(
+        new CustomEvent('before-fragmentation', {
+          detail: range,
+          bubbles: true,
+        }),
+      );
       content = extract(range);
-      outerPage.dispatchEvent(new CustomEvent('after-fragmentation', { detail: content, bubbles: true }));
+      outerPage.dispatchEvent(
+        new CustomEvent('after-fragmentation', {
+          detail: content,
+          bubbles: true,
+        }),
+      );
     } else {
       content = null;
     }
@@ -131,5 +144,7 @@ export function createPages() {
 
   document.body.style.setProperty('--page-count', pageCount);
   document.body.dataset.pageCount = pageCount;
-  document.body.dispatchEvent(new CustomEvent('fragmentation-finished', { bubbles: true }));
+  document.body.dispatchEvent(
+    new CustomEvent('fragmentation-finished', { bubbles: true }),
+  );
 }

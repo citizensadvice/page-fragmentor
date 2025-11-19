@@ -1,4 +1,5 @@
-const rNamedSize = /^(A5|A4|A3|B5|B4|JIS-B5|JIS-B4|letter|legal|ledger|landscape|portrait)(?:\s+(landscape|portrait)$)?/;
+const rNamedSize =
+  /^(A5|A4|A3|B5|B4|JIS-B5|JIS-B4|letter|legal|ledger|landscape|portrait)(?:\s+(landscape|portrait)$)?/;
 
 const SIZES = {
   A5: ['148mm', '210mm'],
