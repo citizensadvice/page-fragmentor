@@ -222,6 +222,7 @@ npm start
 npm lint
 
 # Test
+# Tests are not run on github due to minor font rendering differences
 npx playwright install --with-deps
 npm test
 
