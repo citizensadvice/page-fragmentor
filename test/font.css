@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'OpenSans';
+  font-family: OpenSans;
   src: url('opensans.ttf') format('woff');
 }
 
 @font-face {
-  font-family: 'OpenSans';
+  font-family: OpenSans;
   src: url('opensans-italic.ttf') format('woff');
   font-style: italic;
 }
