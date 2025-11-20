@@ -1,4 +1,4 @@
-import { uuid } from '../uuid';
+import { uuid } from '../uuid.js';
 
 function visibleListItem(node) {
   if (node.nodeType !== Node.ELEMENT_NODE) {
@@ -35,7 +35,9 @@ export class ListExtractor {
   after(fragment) {
     this.lists.forEach((list) => {
       const items = [...list.childNodes].filter(visibleListItem).length;
-      const newList = fragment.querySelector(`ol[data-fragmentation-uuid="${list.dataset.fragmentationUuid}"]`);
+      const newList = fragment.querySelector(
+        `ol[data-fragmentation-uuid="${list.dataset.fragmentationUuid}"]`,
+      );
       if (newList) {
         if (newList.reversed) {
           newList.start = list.start - items;

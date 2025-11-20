@@ -35,12 +35,24 @@ export class NodeRules extends Map {
       breakInsideParentAvoid: parentRule.breakInsideAvoid,
       breakAfter: styles.getPropertyValue('break-after'),
       breakBefore: styles.getPropertyValue('break-before'),
-      orphans: parseInt(styles.getPropertyValue('--orphans') || styles.getPropertyValue('orphans') || 2, 10),
-      widows: parseInt(styles.getPropertyValue('--widows') || styles.getPropertyValue('widows') || 2, 10),
+      orphans: parseInt(
+        styles.getPropertyValue('--orphans') ||
+          styles.getPropertyValue('orphans') ||
+          2,
+        10,
+      ),
+      widows: parseInt(
+        styles.getPropertyValue('--widows') ||
+          styles.getPropertyValue('widows') ||
+          2,
+        10,
+      ),
     };
   }
 
   breakInside(node, styles) {
-    return ['avoid', 'avoid-page'].includes(styles.getPropertyValue('break-inside'));
+    return ['avoid', 'avoid-page'].includes(
+      styles.getPropertyValue('break-inside'),
+    );
   }
 }

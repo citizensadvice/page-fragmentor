@@ -1,5 +1,15 @@
 # Change log
 
+## v2.0.0-alpha.9
+
+- Fully converted to JavaScript modules
+- Removed Jest in favour of node and playwright test suites
+- Added stylelint
+- Updated eslint to flat config
+- Added prettier
+- Fixed size keywords should not be case sensitive
+- Added github actions, codeowners and dependabot
+
 ## v2.0.0-alpha.8
 
 - Fix crashes with older Safari

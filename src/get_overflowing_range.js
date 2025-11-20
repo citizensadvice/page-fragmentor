@@ -1,5 +1,5 @@
-import { breakPointGenerator } from './generators/break_point_generator';
-import { ruleDisablerGenerator } from './generators/rule_disabler_generator';
+import { breakPointGenerator } from './generators/break_point_generator.js';
+import { ruleDisablerGenerator } from './generators/rule_disabler_generator.js';
 
 /**
  * Returns the range overflowing an element
@@ -39,7 +39,10 @@ export function getOverflowingRange(root) {
     } else {
       // No valid break point found.  We are overflowing
       // Use the next break point with any result
-      const range = breakPoint.range({ disableRules: [1, 3, 4], avoidDepth: Infinity });
+      const range = breakPoint.range({
+        disableRules: [1, 3, 4],
+        avoidDepth: Infinity,
+      });
       if (range) {
         return range;
       }

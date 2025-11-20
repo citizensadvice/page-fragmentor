@@ -1,48 +1,65 @@
 <!doctype html>
 <html lang="en-GB">
-<head>
-  <meta charset="utf-8">
-  <title>Block margin</title>
-  <link href="../styles/styles.css" rel="stylesheet">
-  <script src="../src/auto.js"></script>
-  <style>
-    html {
-      --page-size: A5;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <title>Block margin</title>
+    <link
+      href="../styles/styles.css"
+      rel="stylesheet"
+    />
+    <link
+      href="./font.css"
+      rel="stylesheet"
+    />
+    <script
+      src="../src/auto.js"
+      type="module"
+      defer
+    ></script>
+    <style>
+      html {
+        --page-size: A5;
+      }
 
-    section {
-      border: 1px solid yellow;
-      padding-bottom: 1em;
-      margin-bottom: 1em;
-      border-bottom-width: 1em;
-    }
+      section {
+        border: 1px solid yellow;
+        padding-bottom: 1em;
+        margin-bottom: 1em;
+        border-bottom-width: 1em;
+      }
 
-    p {
-      border: 1px solid red;
-      padding-bottom: 1em;
-      margin-bottom: 1em;
-      border-bottom-width: 1em;
-    }
+      p {
+        border: 1px solid red;
+        padding-bottom: 1em;
+        margin-bottom: 1em;
+        border-bottom-width: 1em;
+      }
 
-    .page-content {
-      box-shadow:  inset 0 0 0 1px green;
-    }
-  </style>
-<body>
-<main>
-  <section>
-    <p>
-      <strong>The margins, paddings and borders of parent blocks should be accounted for</strong>
-    </p>
-    <p>One</p>
-    <p>Two</p>
-    <p>Three</p>
-    <p>Four</p>
-    <p>Five</p>
-    <p>Six</p>
-    <p>Seven</p>
-    <p>Eight</p>
-    <p>Nine</p>
-    <p>Ten</p>
-  </section>
-</main>
+      .page-content {
+        box-shadow: inset 0 0 0 1px green;
+      }
+    </style>
+    <body>
+      <main>
+        <section>
+          <p>
+            <strong
+              >The margins, paddings and borders of parent blocks should be
+              accounted for</strong
+            >
+          </p>
+          <p>One</p>
+          <p>Two</p>
+          <p>Three</p>
+          <p>Four</p>
+          <p>Five</p>
+          <p>Six</p>
+          <p>Seven</p>
+          <p>Eight</p>
+          <p>Nine</p>
+          <p>Ten</p>
+        </section>
+      </main>
+    </body>
+  </head>
+</html>
