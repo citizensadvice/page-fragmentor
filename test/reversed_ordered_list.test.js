@@ -13,5 +13,5 @@ test('sets the list start', async ({ page }) => {
   });
   expect(
     await page.$$eval('.page ol', (els) => els.map((el) => el.start)),
-  ).toEqual([154, 118, 83, 47, 10]);
+  ).toEqual([154, 119, 85, 49, 14]);
 });

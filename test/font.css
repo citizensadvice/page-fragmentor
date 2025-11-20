@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "OpenSans";
+  src: url("opensans.ttf") format("woff");
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("opensans-italic.ttf") format("woff");
+  font-style: italic;
+}
+
+body {
+  font-family: OpenSans, sans-serif;
+}

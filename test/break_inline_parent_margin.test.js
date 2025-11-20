@@ -15,5 +15,5 @@ test('second page breaks in the expected place', async ({ page }) => {
   expect(await page.$$('.page:nth-child(2) p')).toHaveLength(3);
   expect(
     await page.$eval('.page:nth-child(2)', (node) => node.innerText),
-  ).toMatch(/^dolore magna aliqua/);
+  ).toMatch(/^incididunt ut labore et dolore magna aliqua/);
 });

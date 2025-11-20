@@ -18,6 +18,6 @@ test('the page breaks in the expected places', async ({ page }) => {
   ).toEqual([
     expect.stringMatching(/^The margins should not be collapsed/),
     expect.stringMatching(/^Lorem ipsum dolor sit amet/),
-    expect.stringMatching(/^ad minim veniam/),
+    expect.stringMatching(/^sunt in culpa qui officia deserunt mollit/),
   ]);
 });

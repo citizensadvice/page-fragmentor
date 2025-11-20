@@ -16,7 +16,7 @@ test('fires create-page events', async ({ page }) => {
         (page, index) => window.createPageEvents[index].target === page,
       ),
     ),
-  ).toEqual(Array(40).fill(true));
+  ).toEqual(Array(41).fill(true));
 });
 
 test('fires before-fragmenation events', async ({ page }) => {
@@ -39,7 +39,7 @@ test('fires before-fragmenation events', async ({ page }) => {
             window.beforeFragmentationEvents[index].detail instanceof Range,
         ),
     ),
-  ).toEqual(Array(39).fill(true));
+  ).toEqual(Array(40).fill(true));
 });
 
 test('fires after-fragmenation events', async ({ page }) => {
@@ -63,7 +63,7 @@ test('fires after-fragmenation events', async ({ page }) => {
               DocumentFragment,
         ),
     ),
-  ).toEqual(Array(39).fill(true));
+  ).toEqual(Array(40).fill(true));
 });
 
 test('fires the fragmenation-finished event', async ({ page }) => {

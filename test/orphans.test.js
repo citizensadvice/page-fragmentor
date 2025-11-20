@@ -15,5 +15,5 @@ test('breaks the 4th paragraph with 5 orphans', async ({ page }) => {
   await page.goto('http://localhost:1234/orphans.html', { waitUntil: 'load' });
   expect(
     await page.$eval('.page:nth-child(4) p', (node) => node.innerText),
-  ).toMatch(/^ultricies nisl risus nec tellus./);
+  ).toMatch(/^pellentesque lectus, vitae ultricies nisl risus/);
 });
