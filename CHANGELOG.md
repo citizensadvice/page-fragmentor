@@ -1,31 +1,17 @@
 # Change log
 
-## v2.0.0-alpha.9
+## v2.0.0
 
 - Fully converted to JavaScript modules
-- Removed Jest in favour of node and playwright test suites
-- Added stylelint
-- Updated eslint to flat config
-- Added prettier
-- Fixed size keywords should not be case sensitive
-- Added github actions, codeowners and dependabot
-
-## v2.0.0-alpha.8
-
-- Fix crashes with older Safari
-
-## v2.0.0-alpha.7
-
-- Fix parent margin, padding and borders not being accounted for when fragmenting
-
-## v2.0.0-alpha.1
-
+  - The entry points have changed, see package.json
 - Fix infinite loop with large areas of break-inside avoid
 - Line box breaking can be disabled by setting `--widows` and `--orphans` to `0`
 - Default styles now include `break-inside: avoid` for headings
-- No break-points will not occur within a table rows, including css tables
+- No break-points will occur within a table rows, including css tables
 - Better algorithm for `break-inside: avoid` where a forced break is required
-- `data-fragmented-start` and `data-framented-end` will be added to all fragmented elements and not just the top ancenstor
+- `data-fragmented-start` and `data-framented-end` will be added to all fragmented elements and not just the top ancestor
+- Fix crashes with older Safari
+- Fixed size keywords should not be case sensitive
 
 ## v1.0.0
 
