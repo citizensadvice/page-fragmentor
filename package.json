@@ -1,40 +1,60 @@
 {
   "name": "@citizensadvice/page-fragmenter",
-  "version": "1.0.0",
+  "version": "2.0.0-alpha.8",
   "description": "Split a HTML page into printable pages",
   "scripts": {
-    "test": "jest",
-    "lint": "eslint . --ext .js",
-    "start": "parcel test/index.html --dist-dir local",
-    "prebuild": "rm -rf dist",
-    "build": "npm run build:main && npm run build:auto",
-    "build:main": "parcel build src/index.js",
-    "build:auto": "parcel build src/auto.js",
+    "test": "playwright test && node --test src/**/*.test.js",
+    "prebuild": "rm -rf .gh-pages",
+    "build": "parcel build test/index.html",
+    "cache:clear": "rm -rf .parcel-cache",
+    "format": "prettier . --write",
+    "lint:format": "prettier . --check",
+    "lint:js": "eslint",
+    "lint:css": "stylelint **/*.css",
+    "lint": "npm run lint:format && npm run lint:js && npm run lint:css",
+    "start": "npm run cache:clear && parcel test/index.html",
+    "deploy": "npm run build -- --no-cache --public-url \"/page-fragmentor/\" && gh-pages -d .gh-pages",
     "preversion": "npm run lint",
-    "prepublishOnly": "npm run build",
-    "release": "np"
+    "postpublish": "npm run deploy",
+    "release": "npx np --any-branch"
   },
   "author": "Daniel Lewis",
   "license": "ISC",
+  "type": "module",
   "files": [
-    "dist/**/*",
     "styles/**/*",
     "src/**/*"
   ],
+  "exports": {
+    ".": "./src/index.js",
+    "./auto": "./src/auto.js",
+    "./styles.css": "./styles/styles.css"
+  },
   "devDependencies": {
-    "@babel/core": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.22.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.3.1",
-    "eslint-plugin-jest-playwright": "^0.2.1",
-    "jest": "^26.6.3",
-    "jest-playwright-preset": "^1.5.1",
-    "np": "^7.4.0",
-    "parcel": "^2.0.0-nightly.626",
-    "playwright": "^1.9.2"
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.1",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-playwright": "^2.3.0",
+    "gh-pages": "^6.3.0",
+    "parcel": "^2.16.1",
+    "playwright": "^1.57.0",
+    "prettier": "^3.6.2",
+    "stylelint": "^16.26.0",
+    "stylelint-config-standard": "^39.0.1"
+  },
+  "prettier": {
+    "singleAttributePerLine": true,
+    "singleQuote": true
+  },
+  "targets": {
+    "main": false,
+    "default": {
+      "distDir": ".gh-pages"
+    }
+  },
+  "np": {
+    "yarn": false
   }
 }

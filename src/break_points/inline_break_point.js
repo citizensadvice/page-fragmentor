@@ -1,14 +1,6 @@
-import { BaseBreakPoint } from './base_break_point';
-import { lineBoxGenerator } from '../generators/line_box_generator';
-
-function calculateBottomSpace(container) {
-  const style = window.getComputedStyle(container);
-  const size = (parseFloat(style.paddingBottom) || 0)
-    + (parseFloat(style.borderBottomWidth) || 0)
-    + (parseFloat(style.marginBottom) || 0);
-
-  return Math.ceil(Math.max(size, 0));
-}
+import { BaseBreakPoint } from './base_break_point.js';
+import { lineBoxGenerator } from '../generators/line_box_generator.js';
+import { getMargin } from '../get_margin.js';
 
 /**
  * Represents a class B breakpoint
@@ -17,6 +9,7 @@ export class InlineBreakPoint extends BaseBreakPoint {
   constructor(...args) {
     super(...args);
     this.nodes = [];
+    this.type = 'inline';
   }
 
   get overflowing() {
@@ -24,18 +17,34 @@ export class InlineBreakPoint extends BaseBreakPoint {
     return rect.top > this.rootRect.bottom;
   }
 
-  range(disableBreakRules = []) {
-    if (!disableBreakRules.includes(4) && this.containerRules.breakInsideAvoid) {
+  range({ disableRules = [], avoidDepth = 0 } = {}) {
+    const { widows, orphans } = this.containerRules;
+    if (widows === 0 && orphans === 0) {
       return null;
     }
 
-    const lineBoxRange = this.findLineBoxRange(disableBreakRules.includes(3));
+    if (
+      !(
+        disableRules.includes(4) &&
+        this.containerRules.breakInsideAvoid <= avoidDepth
+      ) &&
+      this.containerRules.breakInsideAvoid
+    ) {
+      return null;
+    }
+
+    const lineBoxRange = this.findLineBoxRange(disableRules.includes(3));
     const overflowingNodeRange = this.findFirstOverflowingNodeRange();
 
     let overflowing = lineBoxRange || overflowingNodeRange;
 
     if (lineBoxRange && overflowingNodeRange) {
-      if (lineBoxRange.compareBoundaryPoints(Range.START_TO_START, overflowingNodeRange) === 1) {
+      if (
+        lineBoxRange.compareBoundaryPoints(
+          Range.START_TO_START,
+          overflowingNodeRange,
+        ) === 1
+      ) {
         overflowing = lineBoxRange;
       } else {
         overflowing = overflowingNodeRange;
@@ -74,7 +83,7 @@ export class InlineBreakPoint extends BaseBreakPoint {
     for (const lineBox of lineBoxGenerator(this.nodes)) {
       if (!overflow) {
         const rect = lineBox.getBoundingClientRect();
-        if (rect.bottom > (this.rootRect.bottom - this.bottomSpace)) {
+        if (rect.bottom > this.rootRect.bottom - this.bottomSpace) {
           overflow = lineBox;
           overflowIndex = lineBoxes.length;
         }
@@ -94,6 +103,10 @@ export class InlineBreakPoint extends BaseBreakPoint {
       lineBoxes = lineBoxes.slice(orphans);
     }
 
+    if (lineBoxes.length === 1) {
+      return null;
+    }
+
     return lineBoxes[lineBoxes.length - widows] || null;
   }
 
@@ -102,10 +115,14 @@ export class InlineBreakPoint extends BaseBreakPoint {
   findFirstOverflowingNodeRange() {
     const foundNode = this.nodes.find((node) => {
       const rect = this.rectFilter.get(node);
-      return rect.bottom > (this.rootRect.bottom - this.bottomSpace);
+      return rect.bottom > this.rootRect.bottom - getMargin(node, this.root);
     });
 
-    if (!foundNode || foundNode.nodeType === Node.TEXT_NODE || foundNode === this.firstNode) {
+    if (
+      !foundNode ||
+      foundNode.nodeType === Node.TEXT_NODE ||
+      foundNode === this.firstNode
+    ) {
       return null;
     }
     const range = new Range();
@@ -129,7 +146,7 @@ export class InlineBreakPoint extends BaseBreakPoint {
   }
 
   get bottomSpace() {
-    return (this._bottomSpace ??= calculateBottomSpace(this.container));
+    return (this._bottomSpace ??= getMargin(this.container, this.root, true));
   }
 
   get containerRules() {

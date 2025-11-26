@@ -1,9 +1,12 @@
-import { uuid } from '../uuid';
+import { uuid } from '../uuid.js';
 
 function fixTable(table) {
   // If the table already has cols, don't add new ones
   if (!table.querySelector('col')) {
-    const columns = [...table.rows[0].cells].reduce((total, cell) => total + cell.colSpan, 0);
+    const columns = [...table.rows[0].cells].reduce(
+      (total, cell) => total + cell.colSpan,
+      0,
+    );
 
     for (let i = 0; i < columns; i += 1) {
       const col = document.createElement('col');
@@ -14,9 +17,10 @@ function fixTable(table) {
 
   // Fix the widths of the columns
   [...table.querySelectorAll('col')].forEach((col) => {
-    const rect = col.getBoundingClientRect();
-    // eslint-disable-next-line no-param-reassign
-    col.style.width = `${rect.width}px`;
+    const { width } = col.getBoundingClientRect();
+    if (width) {
+      col.style.width = `${Math.ceil(width)}px`;
+    }
   });
 }
 
@@ -43,12 +47,16 @@ export class TableExtractor {
 
   after(fragment) {
     this.tables.forEach((table) => {
-      const newTable = fragment.querySelector(`table[data-fragmentation-uuid="${table.dataset.fragmentationUuid}"]`);
+      const newTable = fragment.querySelector(
+        `table[data-fragmentation-uuid="${table.dataset.fragmentationUuid}"]`,
+      );
       if (!newTable) {
         return;
       }
       // Remove fixed widths
-      [...table.querySelectorAll('col[data-fragmentation-col]')].forEach((col) => col.remove());
+      [...table.querySelectorAll('col[data-fragmentation-col]')].forEach(
+        (col) => col.remove(),
+      );
       // Add in thead
       if (!newTable.tHead && table.tHead) {
         newTable.tHead = table.tHead.cloneNode(true);

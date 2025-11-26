@@ -1,9 +1,9 @@
-import { nodeGenerator } from './node_generator';
-import { RectFilter } from '../caches/rect_filter_cache';
-import { BaseBreakPoint } from '../break_points/base_break_point';
-import { InlineBreakPoint } from '../break_points/inline_break_point';
-import { SiblingBreakPoint } from '../break_points/sibling_break_point';
-import { NodeRules } from '../caches/node_rule_cache';
+import { nodeGenerator } from './node_generator.js';
+import { RectFilter } from '../caches/rect_filter_cache.js';
+import { BaseBreakPoint } from '../break_points/base_break_point.js';
+import { InlineBreakPoint } from '../break_points/inline_break_point.js';
+import { SiblingBreakPoint } from '../break_points/sibling_break_point.js';
+import { NodeRules } from '../caches/node_rule_cache.js';
 
 /**
  * Yields permissible break points
@@ -13,10 +13,16 @@ import { NodeRules } from '../caches/node_rule_cache';
  */
 export function* breakPointGenerator(root) {
   const rectFilter = new RectFilter();
+  // Fix for older versions of safari
+  rectFilter.acceptNode = rectFilter.acceptNode.bind(rectFilter);
   const nodeIterator = nodeGenerator(root, rectFilter);
   const nodeRules = new NodeRules();
 
-  let currentBreakPoint = new SiblingBreakPoint({ root, nodeRules, rectFilter });
+  let currentBreakPoint = new SiblingBreakPoint({
+    root,
+    nodeRules,
+    rectFilter,
+  });
   let lastType;
 
   for (const [type, node] of nodeIterator) {
@@ -26,8 +32,12 @@ export function* breakPointGenerator(root) {
           const lastBreakPoint = currentBreakPoint;
           yield currentBreakPoint;
 
-          currentBreakPoint = new SiblingBreakPoint({ root, nodeRules, rectFilter });
-          currentBreakPoint.trailingNodes.push(lastBreakPoint.lastNode);
+          currentBreakPoint = new SiblingBreakPoint({
+            root,
+            nodeRules,
+            rectFilter,
+          });
+          currentBreakPoint.trailingNodes.unshift(lastBreakPoint.lastNode);
         }
         currentBreakPoint.leadingNodes.push(node);
         break;
@@ -39,7 +49,11 @@ export function* breakPointGenerator(root) {
         }
         if (lastType !== type) {
           yield currentBreakPoint;
-          currentBreakPoint = new InlineBreakPoint({ root, nodeRules, rectFilter });
+          currentBreakPoint = new InlineBreakPoint({
+            root,
+            nodeRules,
+            rectFilter,
+          });
         }
         currentBreakPoint.nodes.push(node);
         break;
@@ -48,9 +62,13 @@ export function* breakPointGenerator(root) {
       case 'exit': {
         if (lastType !== type) {
           yield currentBreakPoint;
-          currentBreakPoint = new SiblingBreakPoint({ root, nodeRules, rectFilter });
+          currentBreakPoint = new SiblingBreakPoint({
+            root,
+            nodeRules,
+            rectFilter,
+          });
         }
-        currentBreakPoint.trailingNodes.push(node);
+        currentBreakPoint.trailingNodes.unshift(node);
         break;
       }
 
@@ -64,6 +82,5 @@ export function* breakPointGenerator(root) {
   yield currentBreakPoint;
 
   // If the last node is a text node and we are overflowing we may need to force a breakpoint
-  currentBreakPoint = new BaseBreakPoint({ root, nodeRules, rectFilter });
-  yield currentBreakPoint;
+  yield new BaseBreakPoint({ root, nodeRules, rectFilter });
 }

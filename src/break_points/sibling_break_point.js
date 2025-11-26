@@ -1,4 +1,5 @@
-import { BaseBreakPoint } from './base_break_point';
+import { BaseBreakPoint } from './base_break_point.js';
+import { getMargin } from '../get_margin.js';
 
 /**
  * Represents a class A breakpoint
@@ -11,33 +12,59 @@ export class SiblingBreakPoint extends BaseBreakPoint {
   }
 
   get force() {
-    return (this._force ??= this.leadingNodes.some((node) => this.nodeRules.get(node).breakBefore === 'page')
-      || this.trailingNodes.some((node) => this.nodeRules.get(node).breakAfter === 'page'));
+    return (this._force ??=
+      this.leadingNodes.some(
+        (node) => this.nodeRules.get(node).breakBefore === 'page',
+      ) ||
+      this.trailingNodes.some(
+        (node) => this.nodeRules.get(node).breakAfter === 'page',
+      ));
   }
 
   get overflowing() {
-    return this.leadingNodes.some(this.hasLeadingOverflow, this)
-      || this.trailingNodes.some(this.hasTrailingOverflow, this);
+    return (
+      this.leadingNodes.some(this.hasLeadingOverflow, this) ||
+      this.trailingNodes.some(this.hasTrailingOverflow, this)
+    );
   }
 
   get avoid() {
-    return this.leadingNodes.some((node) => ['avoid', 'avoid-page'].includes(this.nodeRules.get(node).breakBefore))
-      || this.trailingNodes.some((node) => ['avoid', 'avoid-page'].includes(this.nodeRules.get(node).breakAfter));
+    return (
+      this.leadingNodes.some((node) =>
+        ['avoid', 'avoid-page'].includes(this.nodeRules.get(node).breakBefore),
+      ) ||
+      this.trailingNodes.some((node) =>
+        ['avoid', 'avoid-page'].includes(this.nodeRules.get(node).breakAfter),
+      )
+    );
   }
 
-  range(disableBreakRules = []) {
+  get bottom() {
+    let bottom = 0;
+    for (const node of this.trailingNodes) {
+      const nodeBottom = this.getBottom(node);
+      if (nodeBottom < bottom) {
+        return bottom;
+      }
+      bottom = nodeBottom;
+    }
+    return bottom;
+  }
+
+  range({ disableRules = [], avoidDepth = 0 } = {}) {
     const { node, force, avoid } = this;
 
-    if (!node || (node === Node.ELEMENT_NODE && node.matches('td,th'))) {
+    if (!node || node === Node.ELEMENT_NODE) {
       return null;
     }
-    if (!force
-      && !disableBreakRules.includes(2)
-      && this.nodeRules.get(node).breakInsideParentAvoid
+
+    if (
+      !force &&
+      this.nodeRules.get(node).breakInsideParentAvoid > avoidDepth
     ) {
       return null;
     }
-    if (!force && !disableBreakRules.includes(1) && avoid) {
+    if (!force && !disableRules.includes(1) && avoid) {
       return null;
     }
 
@@ -51,7 +78,7 @@ export class SiblingBreakPoint extends BaseBreakPoint {
   // ---------
 
   get node() {
-    return this.trailingNodes[this.trailingNodes.length - 1];
+    return this.trailingNodes[0];
   }
 
   hasLeadingOverflow(node) {
@@ -59,10 +86,12 @@ export class SiblingBreakPoint extends BaseBreakPoint {
     return rect.top > this.rootRect.bottom;
   }
 
-  hasTrailingOverflow(node) {
+  getBottom(node) {
     const rect = this.rectFilter.get(node);
-    const style = node.nodeType === Node.ELEMENT_NODE ? window.getComputedStyle(node) : {};
-    const bottom = Math.ceil(rect.bottom + (parseFloat(style.marginBottom) || 0));
-    return bottom > Math.floor(this.rootRect.bottom);
+    return Math.ceil(rect.bottom + getMargin(node, this.root));
+  }
+
+  hasTrailingOverflow(node) {
+    return this.getBottom(node) > Math.floor(this.rootRect.bottom);
   }
 }

@@ -13,6 +13,7 @@ export class BaseBreakPoint {
     this.rectFilter = rectFilter;
     this.nodeRules = nodeRules;
     this.root = root;
+    this.type = 'base';
   }
 
   // A forced breakpoint
