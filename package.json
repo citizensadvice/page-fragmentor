@@ -4,6 +4,8 @@
   "description": "Split a HTML page into printable pages",
   "scripts": {
     "test": "playwright test && node --test src/**/*.test.js",
+    "prebuild": "rm -rf .gh-pages",
+    "build": "parcel build test/index.html",
     "cache:clear": "rm -rf .parcel-cache",
     "format": "prettier . --write",
     "lint:format": "prettier . --check",
@@ -11,9 +13,7 @@
     "lint:css": "stylelint **/*.css",
     "lint": "npm run lint:format && npm run lint:js && npm run lint:css",
     "start": "npm run cache:clear && parcel test/index.html",
-    "prebuild": "rm -rf dist && rm -rf .parcel-cache",
-    "build": "parcel build test/index.html --no-cache",
-    "deploy": "parcel build test/index.html --no-cache --public-url \"/page-fragmenter/\" && gh-pages -d .gh-pages",
+    "deploy": "npm run build -- --no-cache --public-url \"/page-fragmentor/\" && gh-pages -d .gh-pages",
     "preversion": "npm run lint",
     "postpublish": "npm run deploy",
     "release": "npx np --any-branch"
@@ -47,6 +47,12 @@
   "prettier": {
     "singleAttributePerLine": true,
     "singleQuote": true
+  },
+  "targets": {
+    "main": false,
+    "default": {
+      "distDir": ".gh-pages"
+    }
   },
   "np": {
     "yarn": false

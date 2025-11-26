@@ -6,6 +6,8 @@ This will split a page into multiple printable pages with custom headers and foo
 It is intended to be used to create PDFs from HTML with solutions such [Gotenberg][1]
 or [Puppeteer][2] / [Playwright][3].
 
+[Demo](https://citizensadvice.github.io/page-fragmentor/)
+
 The page breaks can be previewed in the browser, but each browser will render the page
 slightly differently. This means the page breaks cannot be guaranteed to be in the same
 place in each browser. Hyphenation, bold, italic, font-sizes, font-family and sub and sup text
