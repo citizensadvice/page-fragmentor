@@ -31,7 +31,7 @@
     "./styles.css": "./styles/styles.css"
   },
   "devDependencies": {
-    "@playwright/test": "^1.56.1",
+    "@playwright/test": "^1.57.0",
     "@types/node": "^24.10.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
@@ -39,9 +39,9 @@
     "eslint-plugin-playwright": "^2.3.0",
     "gh-pages": "^6.3.0",
     "parcel": "^2.16.1",
-    "playwright": "^1.56.1",
+    "playwright": "^1.57.0",
     "prettier": "^3.6.2",
-    "stylelint": "^16.25.0",
+    "stylelint": "^16.26.0",
     "stylelint-config-standard": "^39.0.1"
   },
   "prettier": {
