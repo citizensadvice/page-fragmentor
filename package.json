@@ -41,7 +41,7 @@
     "parcel": "^2.16.4",
     "playwright": "^1.57.0",
     "prettier": "^3.8.1",
-    "stylelint": "^16.26.0",
+    "stylelint": "^16.26.1",
     "stylelint-config-standard": "^39.0.1"
   },
   "prettier": {
