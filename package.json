@@ -31,16 +31,16 @@
     "./styles.css": "./styles/styles.css"
   },
   "devDependencies": {
-    "@playwright/test": "^1.58.2",
+    "@playwright/test": "^1.60.0",
     "@types/node": "^24.10.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-playwright": "^2.5.1",
+    "eslint-plugin-playwright": "^2.10.3",
     "gh-pages": "^6.3.0",
     "parcel": "^2.16.4",
     "playwright": "^1.57.0",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.3",
     "stylelint": "^16.26.1",
     "stylelint-config-standard": "^39.0.1"
   },
