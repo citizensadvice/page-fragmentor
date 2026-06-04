@@ -35,13 +35,14 @@
     "./styles.css": "./styles/styles.css"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.60.0",
     "@types/node": "^24.10.1",
-    "eslint": "^9.39.1",
+    "eslint": "^10.4.1",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-playwright": "^2.5.1",
+    "eslint-plugin-playwright": "^2.10.4",
     "gh-pages": "^6.3.0",
+    "globals": "^17.6.0",
     "parcel": "^2.16.4",
     "playwright": "^1.60.0",
     "prettier": "^3.8.1",
