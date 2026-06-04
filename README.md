@@ -213,26 +213,33 @@ The fragmentation algorithm is loosely based on the [CSS fragmentation module 3]
 
 ## Development
 
-```bash
-npm install
+We provide a set of [Just](https://just.systems/man/en/introduction.html) recipes for the project:
 
-# Start
-npm start
-# Visit http://localhost:1234
+```sh
+❯ just
+Available recipes:
+    check-all         # Run all checks
+    format            # Run formatters [alias: fmt]
 
-# Lint
-npm lint
+    [lint]
+    lint              # Run lint checks
 
-# Test
-# Tests are not run on github due to minor font rendering differences
-npx playwright install --with-deps
-npm test
+    [setup]
+    setup             # Setup the project
 
-# Build
-npm build
+    [test]
+    playwright        # Run playwright
+    playwright-report # Show playwright report
+    playwright-ui     # Run playwright in UI mode
+    test              # Run unit tests
+```
 
 # Deploy new version
-# Create a release branch
+
+Create a new release branch and run:
+
+```sh
+npm build
 npx np --any-branch
 ```
 
