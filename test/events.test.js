@@ -7,7 +7,7 @@ test('fires create-page events', async ({ page }) => {
       window.createPageEvents.push(e);
     });
   });
-  await page.goto('http://localhost:1234/the_machine_stops.html', {
+  await page.goto('/the_machine_stops.html', {
     waitUntil: 'load',
   });
   expect(
@@ -16,7 +16,7 @@ test('fires create-page events', async ({ page }) => {
         (page, index) => window.createPageEvents[index].target === page,
       ),
     ),
-  ).toEqual(Array(41).fill(true));
+  ).toEqual(Array(42).fill(true));
 });
 
 test('fires before-fragmenation events', async ({ page }) => {
@@ -26,7 +26,7 @@ test('fires before-fragmenation events', async ({ page }) => {
       window.beforeFragmentationEvents.push(e);
     });
   });
-  await page.goto('http://localhost:1234/the_machine_stops.html', {
+  await page.goto('/the_machine_stops.html', {
     waitUntil: 'load',
   });
   expect(
@@ -39,7 +39,7 @@ test('fires before-fragmenation events', async ({ page }) => {
             window.beforeFragmentationEvents[index].detail instanceof Range,
         ),
     ),
-  ).toEqual(Array(40).fill(true));
+  ).toEqual(Array(41).fill(true));
 });
 
 test('fires after-fragmenation events', async ({ page }) => {
@@ -49,7 +49,7 @@ test('fires after-fragmenation events', async ({ page }) => {
       window.afterFragmentationEvents.push(e);
     });
   });
-  await page.goto('http://localhost:1234/the_machine_stops.html', {
+  await page.goto('/the_machine_stops.html', {
     waitUntil: 'load',
   });
   expect(
@@ -63,7 +63,7 @@ test('fires after-fragmenation events', async ({ page }) => {
               DocumentFragment,
         ),
     ),
-  ).toEqual(Array(40).fill(true));
+  ).toEqual(Array(41).fill(true));
 });
 
 test('fires the fragmenation-finished event', async ({ page }) => {
@@ -74,7 +74,7 @@ test('fires the fragmenation-finished event', async ({ page }) => {
       window.fragmenationFinishedEvents.push(e);
     });
   });
-  await page.goto('http://localhost:1234/the_machine_stops.html', {
+  await page.goto('/the_machine_stops.html', {
     waitUntil: 'load',
   });
   expect(

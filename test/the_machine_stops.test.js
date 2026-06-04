@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 test('has the expected number of pages', async ({ page }) => {
-  await page.goto('http://localhost:1234/the_machine_stops.html', {
+  await page.goto('/the_machine_stops.html', {
     waitUntil: 'load',
   });
-  expect(await page.$$('.page')).toHaveLength(41);
+  expect(await page.$$('.page')).toHaveLength(42);
   const lastPageText = await page.$eval(
     '.page:last-child',
     (element) => element.innerText,
@@ -13,21 +13,21 @@ test('has the expected number of pages', async ({ page }) => {
 });
 
 test('sets the total pages', async ({ page }) => {
-  await page.goto('http://localhost:1234/the_machine_stops.html', {
+  await page.goto('/the_machine_stops.html', {
     waitUntil: 'load',
   });
 
-  expect(await page.$eval('body', (el) => el.dataset.pageCount)).toEqual('41');
+  expect(await page.$eval('body', (el) => el.dataset.pageCount)).toEqual('42');
   expect(
     await page.$eval('body', (el) => el.style.getPropertyValue('--page-count')),
-  ).toEqual('41');
+  ).toEqual('42');
 });
 
 test('sets the page numbers', async ({ page }) => {
-  await page.goto('http://localhost:1234/the_machine_stops.html', {
+  await page.goto('/the_machine_stops.html', {
     waitUntil: 'load',
   });
-  const pageNumbers = Array(42)
+  const pageNumbers = Array(43)
     .fill()
     .map((_, i) => String(i))
     .slice(1);

@@ -1,18 +1,16 @@
 import { test, expect } from '@playwright/test';
 
 test('is two pages', async ({ page }) => {
-  await page.goto(
-    'http://localhost:1234/oversized_last_headers_and_footers.html',
-    { waitUntil: 'load' },
-  );
+  await page.goto('/oversized_last_headers_and_footers.html', {
+    waitUntil: 'load',
+  });
   expect(await page.$$('.page')).toHaveLength(2);
 });
 
 test('has no content on last page', async ({ page }) => {
-  await page.goto(
-    'http://localhost:1234/oversized_last_headers_and_footers.html',
-    { waitUntil: 'load' },
-  );
+  await page.goto('/oversized_last_headers_and_footers.html', {
+    waitUntil: 'load',
+  });
 
   expect(
     await page.$eval(
@@ -23,10 +21,9 @@ test('has no content on last page', async ({ page }) => {
 });
 
 test('has headers and footers only on last page', async ({ page }) => {
-  await page.goto(
-    'http://localhost:1234/oversized_last_headers_and_footers.html',
-    { waitUntil: 'load' },
-  );
+  await page.goto('/oversized_last_headers_and_footers.html', {
+    waitUntil: 'load',
+  });
 
   expect(
     await page.$eval('.page:first-child', (node) => node.innerText),

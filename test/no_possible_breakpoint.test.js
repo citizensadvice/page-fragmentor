@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('is three pages', async ({ page }) => {
-  await page.goto('http://localhost:1234/no_possible_breakpoint.html', {
+  await page.goto('/no_possible_breakpoint.html', {
     waitUntil: 'load',
   });
   expect(await page.$$('.page')).toHaveLength(3);
