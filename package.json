@@ -1,6 +1,6 @@
 {
   "name": "@citizensadvice/page-fragmenter",
-  "version": "2.0.0-alpha.8",
+  "version": "2.0.0",
   "description": "Split a HTML page into printable pages",
   "scripts": {
     "test": "playwright test && node --test src/**/*.test.js",
@@ -18,7 +18,7 @@
     "postpublish": "npm run deploy",
     "release": "npx np --any-branch"
   },
-  "author": "Daniel Lewis",
+  "author": "Citizens Advice",
   "license": "ISC",
   "type": "module",
   "files": [
