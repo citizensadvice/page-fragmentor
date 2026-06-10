@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('is one page with no content', async ({ page }) => {
-  await page.goto('http://localhost:1234/no_content.html', {
+  await page.goto('/no_content.html', {
     waitUntil: 'load',
   });
   expect(await page.$$('.page')).toHaveLength(1);

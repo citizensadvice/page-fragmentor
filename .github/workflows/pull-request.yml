@@ -1,0 +1,20 @@
+name: Pull Request
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: ${{ github.event.pull_request.number }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Run all linters
+    uses: ./.github/workflows/lint.yml
+
+  tests:
+    name: Run all tests
+    uses: ./.github/workflows/tests.yml

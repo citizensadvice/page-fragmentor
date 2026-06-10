@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('generates footers', async ({ page }) => {
-  await page.goto('http://localhost:1234/footers.html', { waitUntil: 'load' });
+  await page.goto('/footers.html', { waitUntil: 'load' });
 
   // Safari handles white space differently
   expect(

@@ -1,14 +1,14 @@
 import { test, expect } from '@playwright/test';
 
 test('is three pages', async ({ page }) => {
-  await page.goto('http://localhost:1234/fragmented_element_node.html', {
+  await page.goto('/fragmented_element_node.html', {
     waitUntil: 'load',
   });
   expect(await page.$$('.page')).toHaveLength(3);
 });
 
 test('first page is not fragmented', async ({ page }) => {
-  await page.goto('http://localhost:1234/fragmented_element_node.html', {
+  await page.goto('/fragmented_element_node.html', {
     waitUntil: 'load',
   });
   expect(
@@ -20,7 +20,7 @@ test('first page is not fragmented', async ({ page }) => {
 });
 
 test('second page has a fragmented section', async ({ page }) => {
-  await page.goto('http://localhost:1234/fragmented_element_node.html', {
+  await page.goto('/fragmented_element_node.html', {
     waitUntil: 'load',
   });
   expect(
@@ -35,7 +35,7 @@ test('second page has a fragmented section', async ({ page }) => {
 });
 
 test('third page section is fragmented end', async ({ page }) => {
-  await page.goto('http://localhost:1234/fragmented_element_node.html', {
+  await page.goto('/fragmented_element_node.html', {
     waitUntil: 'load',
   });
   expect(

@@ -1,0 +1,23 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  lint:
+    name: Run all linters
+    uses: ./.github/workflows/lint.yml
+
+  tests:
+    name: Run all tests
+    uses: ./.github/workflows/tests.yml

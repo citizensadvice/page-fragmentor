@@ -1,19 +1,22 @@
-import eslintConfigPrettier from 'eslint-config-prettier';
-import globals from 'globals';
-import importPlugin from 'eslint-plugin-import';
 import js from '@eslint/js';
+import globals from 'globals';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import playwright from 'eslint-plugin-playwright';
 
-export default [
+export default defineConfig([
+  eslintConfigPrettier,
   {
     files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
   },
-  {
-    ignores: ['node_modules', 'dist', 'test-results', '.gh-pages'],
-  },
+  globalIgnores([
+    'node_modules',
+    'dist',
+    'test-results',
+    '.gh-pages',
+    'playwright-report',
+  ]),
   js.configs.recommended,
-  importPlugin.flatConfigs.recommended,
-  eslintConfigPrettier,
   {
     languageOptions: {
       globals: {
@@ -24,9 +27,6 @@ export default [
     },
     rules: {
       'class-methods-use-this': 'off',
-      'import/extensions': ['error', 'always'],
-      'import/no-default-export': 'error',
-      'import/prefer-default-export': 'off',
       'no-continue': 'off',
       'no-underscore-dangle': 'off',
       'no-restricted-syntax': 'off',
@@ -46,7 +46,6 @@ export default [
   },
   {
     files: ['examples/**/*'],
-
     rules: {
       'import/no-extraneous-dependencies': 'off',
       'react/prop-types': 'off',
@@ -63,4 +62,4 @@ export default [
       'import/no-default-export': 'off',
     },
   },
-];
+]);

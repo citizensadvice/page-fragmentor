@@ -1,14 +1,14 @@
 import { test, expect } from '@playwright/test';
 
 test('is two pages', async ({ page }) => {
-  await page.goto('http://localhost:1234/break_before_avoid.html', {
+  await page.goto('/break_before_avoid.html', {
     waitUntil: 'load',
   });
   expect(await page.$$('.page')).toHaveLength(2);
 });
 
 test('breaks within the text block', async ({ page }) => {
-  await page.goto('http://localhost:1234/break_before_avoid.html', {
+  await page.goto('/break_before_avoid.html', {
     waitUntil: 'load',
   });
   expect(
