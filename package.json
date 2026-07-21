@@ -5,7 +5,7 @@
   "scripts": {
     "format": "prettier --write .",
     "lint:format": "prettier --check .",
-    "lint:js": "eslint",
+    "lint:js": "oxlint",
     "lint:css": "stylelint **/*.css",
     "lint": "npm run lint:format && npm run lint:js && npm run lint:css",
     "test": "node --test src/**/*.test.js",
@@ -35,13 +35,9 @@
     "./styles.css": "./styles/styles.css"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.61.1",
-    "eslint": "^10.6.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-playwright": "^2.10.5",
     "gh-pages": "^6.3.0",
-    "globals": "^17.7.0",
+    "oxlint": "^1.74.0",
     "parcel": "^2.16.4",
     "playwright": "^1.61.1",
     "prettier": "^3.9.4",
