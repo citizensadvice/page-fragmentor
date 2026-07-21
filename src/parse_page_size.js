@@ -16,7 +16,7 @@ const SIZES = {
 
 // https://www.w3.org/TR/css-page-3/#page-size-prop
 export function parsePageSize(size) {
-  size = size.trim().toLowerCase(); // eslint-disable-line no-param-reassign
+  size = size.trim().toLowerCase(); // oxlint-disable-line no-param-reassign
   if (!size || size === 'auto') {
     return SIZES.a4;
   }
