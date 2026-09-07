@@ -35,14 +35,14 @@
     "./styles.css": "./styles/styles.css"
   },
   "devDependencies": {
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "^1.63.0",
     "gh-pages": "^6.3.0",
-    "oxlint": "^1.74.0",
+    "oxlint": "^1.81.0",
     "parcel": "^2.16.4",
     "playwright": "^1.61.1",
-    "prettier": "^3.9.4",
-    "start-server-and-test": "^3.0.11",
-    "stylelint": "^17.14.0",
+    "prettier": "^3.9.6",
+    "start-server-and-test": "^3.0.12",
+    "stylelint": "^17.15.0",
     "stylelint-config-standard": "^40.0.0"
   },
   "prettier": {
