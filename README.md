@@ -228,10 +228,42 @@ Available recipes:
     setup             # Setup the project
 
     [test]
-    playwright        # Run playwright
-    playwright-report # Show playwright report
-    playwright-ui     # Run playwright in UI mode
     test              # Run unit tests
+    playwright        # Run playwright
+```
+
+### Playwright tests
+
+You can run `playwright` commands directly e.g. to focus on a single test. When running this way, you'll need to first start the playwright server with:
+
+```sh
+npm run start-playwright-server
+```
+
+Separately, start the development server with:
+
+```sh
+npm start
+```
+
+Then you can run individual playwright commands.
+
+To open the interactive UI, use:
+
+```sh
+npm run playwright:ui
+```
+
+To run an individual test:
+
+```sh
+npx playwright --ui playwright/sample-form.spec.js
+```
+
+To update visual regression test snapshots:
+
+```sh
+npm run playwright:update
 ```
 
 # Deploy new version
