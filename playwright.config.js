@@ -1,12 +1,8 @@
-// @ts-check
 import { defineConfig, devices } from '@playwright/test';
 
 const playwrightTestHost =
   process.env.PLAYWRIGHT_TEST_HOST || 'http://localhost:3000';
 
-/**
- * @see https://playwright.dev/docs/test-configuration
- */
 export default defineConfig({
   testDir: './test',
   fullyParallel: true,
@@ -18,7 +14,6 @@ export default defineConfig({
     ['html', { open: 'never', host: '0.0.0.0', port: 9323 }],
   ],
 
-  // Run your local dev server before starting the tests
   webServer: {
     command: 'npm run start',
     url: playwrightTestHost,
@@ -26,26 +21,21 @@ export default defineConfig({
     timeout: 120 * 1000,
   },
 
-  // Shared settings for all the projects below.
-  // See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    trace: 'on-first-retry',
     baseURL: playwrightTestHost,
+    reducedMotion: 'reduce',
+    trace: 'on-first-retry',
+    connectOptions: {
+      // Required when connecting via run-server,
+      // used for consistent rendering across platforms
+      wsEndpoint: 'ws://127.0.0.1:5000/',
+    },
   },
 
-  /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
   ],
 });

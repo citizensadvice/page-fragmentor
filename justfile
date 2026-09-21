@@ -27,17 +27,7 @@ test:
 # Run playwright
 [group('test')]
 playwright:
-    npm run playwright
-
-# Run playwright in UI mode
-[group('test')]
-playwright-ui:
-    npm run playwright:ui
-
-# Show playwright report
-[group('test')]
-playwright-report:
-    npx playwright show-report --host 0.0.0.0 --port 9323
+    bin/playwright-ci --quiet
 
 # Run all checks
 check-all: lint test playwright
